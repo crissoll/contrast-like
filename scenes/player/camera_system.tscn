@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://boghcd8vbk00t"]
 
+[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://scripts/player/camera_system.gd" id="1_6firl"]
+
 [node name="CameraSystem" type="Node3D" unique_id=1125210116]
+script = ExtResource("1_6firl")
+rotation_sensitivity = Vector2(0.01, 0.01)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1170627881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73821336, 2.302055)
