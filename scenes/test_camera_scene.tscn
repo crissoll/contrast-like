@@ -6,13 +6,15 @@
 script/source = "extends Node3D
 
 @onready 
-var camera_system: CompCameraHandler = $\"../CameraSystem\"
+var camera_system: CompCameraHandler = $\"../CameraHandler\"
 @onready 
 var player: CharacterBody3D = $\"..\"
 
 @export
 var move_speed : float = 100.0
 
+var acceleration := 40.0
+var cur_speed : float = 0.0
 
 func _physics_process(delta: float) -> void:
 	var move_vector := Input.get_vector(
@@ -21,12 +23,34 @@ func _physics_process(delta: float) -> void:
 		&\"move_forward\",
 		&\"move_backward\"
 	)
-	player.velocity = move_speed * (
+	
+	if(move_vector.length() < 0.1):
+		cur_speed = 0
+	elif cur_speed < move_speed:
+		cur_speed += acceleration * delta
+	
+	player.velocity = cur_speed * (
 		move_vector.x * camera_system.basis.x +
-	 	move_vector.y * camera_system.basis.z * Vector3(1,0,1)
-	)
+	 	move_vector.y * camera_system.basis.z * Vector3(1,0,1)	
+	) + player.velocity * Vector3.UP
+	
+	if(!player.is_on_floor()):
+		player.velocity.y -= 10.0 * delta
+	else:
+		player.velocity.y = 0
+	print(player.velocity.y)
 	player.move_and_slide()
 "
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u25ut"]
+radius = 0.6
+height = 1.9335938
+
+[sub_resource type="BoxMesh" id="BoxMesh_u25ut"]
+size = Vector3(1, 1.2807922, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8afob"]
+size = Vector3(1, 0.55885315, 1)
 
 [sub_resource type="Gradient" id="Gradient_a1bje"]
 colors = PackedColorArray(0, 0.3764706, 0, 1, 0, 0.68235296, 0, 1)
@@ -44,8 +68,15 @@ albedo_texture = SubResource("NoiseTexture2D_a2m2l")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_u25ut"]
 material = SubResource("StandardMaterial3D_k7qrq")
+size = Vector2(200, 200)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8qguc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_k7qrq"]
+size = Vector3(1, 1, 4.1186523)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k7qrq"]
+size = Vector3(1, 1, 2.5966187)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6firl"]
 size = Vector3(1, 1, 0.25097656)
@@ -56,28 +87,55 @@ size = Vector3(1, 1, 0.626709)
 [node name="TestCameraScene" type="Node3D" unique_id=445648679]
 
 [node name="Player" parent="." unique_id=758579912 instance=ExtResource("1_8qguc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5181751)
+floor_max_angle = 1.553343
 
 [node name="TempMoveSyst" type="Node3D" parent="Player" unique_id=1475648199]
 script = SubResource("GDScript_u25ut")
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Player" unique_id=649147940]
+[node name="AreaLight3D" type="OmniLight3D" parent="Player" unique_id=1183214467]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1202879567]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1052210143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9748261, 0)
+shape = SubResource("CapsuleShape3D_u25ut")
+
+[node name="Model" type="Node3D" parent="Player" unique_id=1241413087]
+transform = Transform3D(0.6232473, 0, 0, 0, 1, 0, 0, 0, 0.6335432, 0, 0.6312103, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Player/Model" unique_id=2055906226]
+mesh = SubResource("BoxMesh_u25ut")
+
+[node name="Head" type="MeshInstance3D" parent="Player/Model" unique_id=54942618]
+transform = Transform3D(0.6464411, 0, 0, 0, 0.6464411, 0, 0, 0, 0.6464411, 0, 0.8131645, 0)
+mesh = SubResource("BoxMesh_8afob")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1202879567]
 mesh = SubResource("PlaneMesh_u25ut")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D" unique_id=1471188961]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16738312)
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1471188961]
+collision_layer = 3
+collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2" unique_id=1107810162]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0041634366, -0.1866455)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1107810162]
 shape = SubResource("WorldBoundaryShape3D_8qguc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2111797225]
+transform = Transform3D(1, 0, 0, 0, 0.72905, 0.68446046, 0, -0.68446046, 0.72905, 0, 0.504989, 5.206497)
+mesh = SubResource("BoxMesh_k7qrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor/MeshInstance3D" unique_id=142439947]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/MeshInstance3D/StaticBody3D" unique_id=1016857129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
+shape = SubResource("BoxShape3D_k7qrq")
 
 [node name="Wall" type="MeshInstance3D" parent="." unique_id=1223354117]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, -16.738312)
 mesh = SubResource("BoxMesh_6firl")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=1550609615]
+collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=380498800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1866455)
@@ -89,5 +147,3 @@ light_energy = 1.6
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1694917261]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.017998, 0, 0)
-
-[editable path="Player"]

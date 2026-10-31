@@ -2,21 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://boghcd8vbk00t" path="res://scenes/player/camera_system.tscn" id="1_8afob"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_u25ut"]
-size = Vector3(1, 1.2807922, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8afob"]
-size = Vector3(1, 0.55885315, 1)
-
 [node name="Player" type="CharacterBody3D" unique_id=758579912]
 
-[node name="CameraSystem" parent="." unique_id=1125210116 instance=ExtResource("1_8afob")]
+[node name="CameraHandler" parent="." unique_id=1125210116 instance=ExtResource("1_8afob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=887427056]
-transform = Transform3D(0.6232473, 0, 0, 0, 1, 0, 0, 0, 0.6335432, 0, 0.6312103, 0)
-mesh = SubResource("BoxMesh_u25ut")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=936064089]
-transform = Transform3D(0.40289268, 0, 0, 0, 0.6464411, 0, 0, 0, 0.40954837, 0, 1.4443748, 0)
-mesh = SubResource("BoxMesh_8afob")

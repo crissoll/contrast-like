@@ -46,6 +46,11 @@ jump={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Walls"
+3d_physics/layer_2="Camera"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
