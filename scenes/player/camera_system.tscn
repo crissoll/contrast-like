@@ -4,7 +4,7 @@
 
 [node name="CameraHandler" type="Node3D" unique_id=1125210116]
 script = ExtResource("1_6firl")
-rotation_sensitivity = Vector2(0.01, 0.01)
+vertical_rotation_max_value = 1.0471975511965976
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=2013334702]
 collision_mask = 2

@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 		cur_speed = 0
 	elif cur_speed < move_speed:
 		cur_speed += acceleration * delta
+	
 	if player.is_on_floor():
 		player.velocity = cur_speed * (
 			move_vector.x * camera_system.basis.x +
@@ -30,5 +31,5 @@ func _physics_process(delta: float) -> void:
 		) +player.velocity * Vector3.UP
 	else:
 		player.velocity.y -= 10.0 * delta
-	print(player.velocity.y)
+	
 	player.move_and_slide()
