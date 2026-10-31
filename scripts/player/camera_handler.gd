@@ -14,8 +14,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"ui_cancel"):
-		print(Input.mouse_mode)
-		print(get_path())
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
@@ -30,6 +28,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_object_local(Vector3.RIGHT, -event.relative.y * rotation_sensitivity.y)
 
 		# NOW this line works perfectly because the math prior didn't corrupt the axes
-		rotation.x = clampf(rotation.x, vertical_rotation_min_value, vertical_rotation_max_value)
+		rotation.x = clampf(rotation.x, -vertical_rotation_max_value, -vertical_rotation_min_value)
 		rotation.z = 0
 		
