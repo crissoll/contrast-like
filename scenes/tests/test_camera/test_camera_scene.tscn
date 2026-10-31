@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://c2sd4uc3h0iv5"]
+
+[ext_resource type="PackedScene" uid="uid://k20j6bl4oik8" path="res://scenes/tests/test_camera/temp_player.tscn" id="1_k60hx"]
+
+[sub_resource type="Gradient" id="Gradient_a1bje"]
+colors = PackedColorArray(0, 0.3764706, 0, 1, 0, 0.68235296, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mvn1l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a2m2l"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_mvn1l")
+color_ramp = SubResource("Gradient_a1bje")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7qrq"]
+albedo_texture = SubResource("NoiseTexture2D_a2m2l")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u25ut"]
+material = SubResource("StandardMaterial3D_k7qrq")
+size = Vector2(200, 200)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8qguc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6firl"]
+size = Vector3(1, 1, 0.25097656)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u25ut"]
+size = Vector3(1, 1, 0.626709)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k7qrq"]
+size = Vector3(1, 1, 4.1186523)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k7qrq"]
+size = Vector3(1, 1, 2.5966187)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k60hx"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_u25ut"]
+material = SubResource("StandardMaterial3D_k60hx")
+text = "This Block can be walked on but doesn't stop the camera"
+font_size = 30
+autowrap_mode = 3
+
+[sub_resource type="TextMesh" id="TextMesh_k60hx"]
+material = SubResource("StandardMaterial3D_k60hx")
+text = "This Block can be walked and stops the camera"
+font_size = 30
+autowrap_mode = 3
+
+[node name="TestCameraScene" type="Node3D" unique_id=445648679]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1202879567]
+mesh = SubResource("PlaneMesh_u25ut")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1471188961]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1107810162]
+shape = SubResource("WorldBoundaryShape3D_8qguc")
+
+[node name="SkyLight" type="DirectionalLight3D" parent="." unique_id=645763622]
+transform = Transform3D(1, 0, 0, 0, -0.46778572, 0.883842, 0, -0.883842, -0.46778572, 0, 19.191319, 0)
+light_energy = 1.6
+
+[node name="Player" parent="." unique_id=1719097324 instance=ExtResource("1_k60hx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5181751)
+
+[node name="Wall" type="MeshInstance3D" parent="." unique_id=1223354117]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, -16.738312)
+mesh = SubResource("BoxMesh_6firl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=1550609615]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=380498800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1866455)
+shape = SubResource("BoxShape3D_u25ut")
+
+[node name="SlopeNoCameraBlock" type="MeshInstance3D" parent="." unique_id=2111797225]
+transform = Transform3D(1, 0, 0, 0, 0.72905, 0.68446046, 0, -0.68446046, 0.72905, 0, 0.504989, 5.206497)
+mesh = SubResource("BoxMesh_k7qrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SlopeNoCameraBlock" unique_id=142439947]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlopeNoCameraBlock/StaticBody3D" unique_id=1016857129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
+shape = SubResource("BoxShape3D_k7qrq")
+
+[node name="TextNoCameraBlock" type="MeshInstance3D" parent="." unique_id=522936364]
+transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 0, -4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, 0, 0.581589, 3.5124207)
+mesh = SubResource("TextMesh_u25ut")
+
+[node name="SlopeCameraBlock" type="MeshInstance3D" parent="." unique_id=1511181607]
+transform = Transform3D(1, 0, 0, 0, 0.72905, 0.68446046, 0, -0.68446046, 0.72905, -7.7313623, 0.504989, 5.206497)
+mesh = SubResource("BoxMesh_k7qrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SlopeCameraBlock" unique_id=1343516861]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlopeCameraBlock/StaticBody3D" unique_id=1513741878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
+shape = SubResource("BoxShape3D_k7qrq")
+
+[node name="TextCameraBlock" type="MeshInstance3D" parent="." unique_id=251458179]
+transform = Transform3D(-1, -1.509958e-07, -6.600236e-15, 0, -4.371139e-08, 1, -1.509958e-07, 1, 4.371139e-08, -7.7313623, 0.581589, 3.5124207)
+mesh = SubResource("TextMesh_k60hx")

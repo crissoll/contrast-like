@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://k20j6bl4oik8"]
+
+[ext_resource type="PackedScene" uid="uid://boghcd8vbk00t" path="res://scenes/player/camera_system.tscn" id="1_w60vo"]
+[ext_resource type="Script" uid="uid://0hiq77llmce2" path="res://scenes/tests/test_camera/temp_move_handler.gd" id="2_m4qmx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u25ut"]
+radius = 0.6
+height = 1.9335938
+
+[sub_resource type="BoxMesh" id="BoxMesh_u25ut"]
+size = Vector3(1, 1.2807922, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8afob"]
+size = Vector3(1, 0.55885315, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1719097324]
+floor_max_angle = 1.553343
+
+[node name="CameraHandler" parent="." unique_id=1125210116 instance=ExtResource("1_w60vo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
+vertical_rotation_max_value = 1.3962634015954636
+
+[node name="TempMoveSyst" type="Node3D" parent="." unique_id=102906964]
+script = ExtResource("2_m4qmx")
+
+[node name="AreaLight3D" type="OmniLight3D" parent="." unique_id=1053713815]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1053617458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9748261, 0)
+shape = SubResource("CapsuleShape3D_u25ut")
+
+[node name="Model" type="Node3D" parent="." unique_id=2069406185]
+transform = Transform3D(0.6232473, 0, 0, 0, 1, 0, 0, 0, 0.6335432, 0, 0.6312103, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=516528943]
+mesh = SubResource("BoxMesh_u25ut")
+
+[node name="Head" type="MeshInstance3D" parent="Model" unique_id=507906054]
+transform = Transform3D(0.6464411, 0, 0, 0, 0.6464411, 0, 0, 0, 0.6464411, 0, 0.8131645, 0)
+mesh = SubResource("BoxMesh_8afob")
