@@ -18,7 +18,6 @@ floor_max_angle = 1.553343
 
 [node name="CameraHandler" parent="." unique_id=1125210116 instance=ExtResource("1_w60vo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
-vertical_rotation_max_value = 1.3962634015954636
 
 [node name="TempMoveSyst" type="Node3D" parent="." unique_id=102906964]
 script = ExtResource("2_m4qmx")
