@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 		&"move_backward"
 	)
 	
-	if(move_vector.length() < 0.1):
+	if(move_vector.length() < 0.05):
 		cur_speed = 0
 	elif cur_speed < move_speed:
 		cur_speed += acceleration * delta
@@ -27,9 +27,10 @@ func _physics_process(delta: float) -> void:
 	if player.is_on_floor():
 		player.velocity = cur_speed * (
 			move_vector.x * camera_system.basis.x +
-		 	move_vector.y * camera_system.basis.z * Vector3(1,0,1)	
+		 	move_vector.y * camera_system.basis.z
 		) +player.velocity * Vector3.UP
 	else:
 		player.velocity.y -= 10.0 * delta
+	
 	
 	player.move_and_slide()
