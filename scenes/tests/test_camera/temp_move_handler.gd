@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 		 	move_vector.y * camera_system.basis.z
 		) +player.velocity * Vector3.UP
 		if(move_vector.length() > 0.05):
-			model.rotation = (camera_system.rotation + move_vector.angle() * Vector3.DOWN)
+			model.rotation = (camera_system.rotation + (move_vector.angle() + PI/2) * Vector3.DOWN)
 	else:
 		player.velocity.y -= 10.0 * delta
 	
