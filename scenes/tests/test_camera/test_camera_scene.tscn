@@ -45,7 +45,7 @@ autowrap_mode = 3
 
 [sub_resource type="TextMesh" id="TextMesh_k60hx"]
 material = SubResource("StandardMaterial3D_k60hx")
-text = "This Block can be walked and stops the camera"
+text = "This Block can be walked on and stops the camera"
 font_size = 30
 autowrap_mode = 3
 
@@ -91,8 +91,8 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
 shape = SubResource("BoxShape3D_k7qrq")
 
-[node name="TextNoCameraBlock" type="MeshInstance3D" parent="." unique_id=522936364]
-transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 0, -4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, 0, 0.581589, 3.5124207)
+[node name="TextNoCameraBlock" type="MeshInstance3D" parent="SlopeNoCameraBlock" unique_id=522936364]
+transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 5.983743e-08, -0.6844605, 0.7290499, -6.373558e-08, 0.7290499, 0.6844605, 0, 1.2153738, -1.182637)
 mesh = SubResource("TextMesh_u25ut")
 
 [node name="SlopeCameraBlock" type="MeshInstance3D" parent="." unique_id=1511181607]
@@ -107,6 +107,17 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
 shape = SubResource("BoxShape3D_k7qrq")
 
-[node name="TextCameraBlock" type="MeshInstance3D" parent="." unique_id=251458179]
-transform = Transform3D(-1, -1.509958e-07, -6.600236e-15, 0, -4.371139e-08, 1, -1.509958e-07, 1, 4.371139e-08, -7.7313623, 0.581589, 3.5124207)
+[node name="TextCameraBlock" type="MeshInstance3D" parent="SlopeCameraBlock" unique_id=251458179]
+transform = Transform3D(-1, -1.509958e-07, -6.600236e-15, 1.0335066e-07, -0.6844605, 0.7290499, -1.10083484e-07, 0.7290499, 0.6844605, 0, 1.2153738, -1.182637)
 mesh = SubResource("TextMesh_k60hx")
+
+[node name="RandomSlope" type="MeshInstance3D" parent="." unique_id=1363123453]
+transform = Transform3D(-0.98110497, 0.13242686, -0.14105387, 0, 0.72905, 0.68446046, 0.19347627, 0.67152756, -0.7152746, 9.851, 0.504989, -0.48328495)
+mesh = SubResource("BoxMesh_k7qrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RandomSlope" unique_id=329408997]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RandomSlope/StaticBody3D" unique_id=1612022275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.7683716e-07, 0.79830885)
+shape = SubResource("BoxShape3D_k7qrq")

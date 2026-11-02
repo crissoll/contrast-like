@@ -13,6 +13,8 @@ size = Vector3(1, 1.2807922, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_8afob"]
 size = Vector3(1, 0.55885315, 1)
 
+[sub_resource type="PrismMesh" id="PrismMesh_u25ut"]
+
 [node name="Player" type="CharacterBody3D" unique_id=1719097324]
 floor_max_angle = 1.553343
 
@@ -37,3 +39,7 @@ mesh = SubResource("BoxMesh_u25ut")
 [node name="Head" type="MeshInstance3D" parent="Model" unique_id=507906054]
 transform = Transform3D(0.6464411, 0, 0, 0, 0.6464411, 0, 0, 0, 0.6464411, 0, 0.8131645, 0)
 mesh = SubResource("BoxMesh_8afob")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" unique_id=1523881939]
+transform = Transform3D(1.8613997e-07, 0.6, 8.569311e-09, -3.0058274e-22, -2.6226834e-08, 0.19604294, 1.4194621, -7.86805e-08, -1.2523791e-15, 0, 1.104, 0)
+mesh = SubResource("PrismMesh_u25ut")
