@@ -25,9 +25,6 @@ var camera_allignment_target_node : Node3D
 var aligment_rotation_speed := PI/2
 var aligning_camera := false
 
-@onready
-var global_pos_at_last_input := global_position
-var portrait_mode_radius_passed : bool = false
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -63,8 +60,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_view(event.relative * mouse_sensitivity)
 
 func rotate_view(rotation_vector:Vector2) -> void:
-	global_pos_at_last_input = global_position
-	portrait_mode_radius_passed = false
 	rotate_y(-rotation_vector.x * horizontal_sensitivity)
 	pitch_pivot.rotation.x -= rotation_vector.y * vertical_sensitivity
 	pitch_pivot.rotation.x = clampf(
