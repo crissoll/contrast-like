@@ -25,6 +25,7 @@ aligment_rotation_speed = 15.708
 
 [node name="TempMoveSyst" type="Node3D" parent="." unique_id=102906964]
 script = ExtResource("2_m4qmx")
+move_speed = 20.0
 
 [node name="AreaLight3D" type="OmniLight3D" parent="." unique_id=1053713815]
 
