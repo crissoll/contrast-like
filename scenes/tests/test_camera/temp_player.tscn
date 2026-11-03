@@ -18,9 +18,10 @@ size = Vector3(1, 0.55885315, 1)
 [node name="Player" type="CharacterBody3D" unique_id=1719097324]
 floor_max_angle = 1.553343
 
-[node name="CameraHandler" parent="." unique_id=1125210116 node_paths=PackedStringArray("inactivity_rotation_target_node") instance=ExtResource("1_w60vo")]
+[node name="CameraHandler" parent="." unique_id=1125210116 node_paths=PackedStringArray("camera_allignment_target_node") instance=ExtResource("1_w60vo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
-inactivity_rotation_target_node = NodePath("../Model")
+camera_allignment_target_node = NodePath("../Model")
+aligment_rotation_speed = 15.708
 
 [node name="TempMoveSyst" type="Node3D" parent="." unique_id=102906964]
 script = ExtResource("2_m4qmx")
