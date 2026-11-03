@@ -37,7 +37,8 @@ var portrait_mode_radius := 1.0
 var last_global_position := global_position
 var threshold_passed : bool = false
 
-
+func is_inactive() -> bool:
+	return Time.get_unix_time_from_system() - last_input >= inactivity_time
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -48,8 +49,11 @@ func _physics_process(delta: float) -> void:
 				portrait_mode_radius ** 2:
 			threshold_passed = true
 	
-	elif (Time.get_unix_time_from_system() - last_input >= inactivity_time) and inactivity_rotation_target_node != null:
-		if abs(inactivity_rotation_target_node.global_rotation.y - global_rotation.y) > PI * 15/16:
+	elif is_inactive() and inactivity_rotation_target_node != null:
+		if angle_difference(
+				inactivity_rotation_target_node.global_rotation.y,
+				global_rotation.y
+				) > PI * 15/16:
 			global_rotation.y += delta * PI / 2.0
 		else:
 			global_rotation.y = rotate_toward(
