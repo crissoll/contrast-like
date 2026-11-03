@@ -11,7 +11,8 @@ var wall_tangent : Vector3
 
 @export
 var move_speed : float = 100.0
-
+@export
+var rotation_speed := PI
 var acceleration := 40.0
 var cur_speed : float = 0.0
 
@@ -42,12 +43,15 @@ func _physics_process(delta: float) -> void:
 			-move_vector.y * Vector3.UP)
 	
 	elif player.is_on_floor():
-		player.velocity = cur_speed * (
+		var move_dir := (
 			move_vector.x * camera_system.basis.x +
 		 	move_vector.y * camera_system.basis.z
-		) +player.velocity * Vector3.UP
+		)
+		var cur_dir := (player.velocity * Vector3(1,0,1)).normalized()
+		cur_dir = cur_dir.slerp(move_dir,delta * rotation_speed)
+		player.velocity = cur_speed * cur_dir + player.velocity * Vector3.UP
 		if(move_vector.length() > 0.05):
-			model.rotation = (camera_system.rotation + (move_vector.angle() + PI/2) * Vector3.DOWN)
+			model.global_rotation = (atan2(cur_dir.z,cur_dir.x) + PI/2) * Vector3.DOWN
 	else:
 		player.velocity.y -= 10.0 * delta
 	
