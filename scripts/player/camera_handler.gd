@@ -34,6 +34,7 @@ var max_camera_distance := 1.0:
 		max_camera_distance = value
 		camera_container.max_distance = max_camera_distance
 
+
 @onready
 var camera_container : CameraContainer = (func()->CameraContainer:
 	var cam_con : CameraContainer = load("uid://c7g5rw3652nl2").instantiate()
@@ -44,9 +45,9 @@ var camera_container : CameraContainer = (func()->CameraContainer:
 	).call()
 
 
-
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"camera_align"):
@@ -78,6 +79,7 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_view(event.relative * mouse_sensitivity)
+
 
 func rotate_view(rotation_vector:Vector2) -> void:
 	rotate_y(-rotation_vector.x * horizontal_sensitivity)
