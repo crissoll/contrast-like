@@ -21,9 +21,29 @@ var pitch_pivot: Node3D = $PitchPivot
 @export 
 var camera_allignment_target_node : Node3D
 
-@export_range(0, 6*PI, 0.001, "suffix:rad/s")
+@export_range(0, 10*PI, 0.001, "suffix:rad/s")
 var aligment_rotation_speed := PI/2
 var aligning_camera := false
+@onready
+var player: CharacterBody3D = $".."
+
+@export_group("Camera Padding")
+@export
+var max_camera_distance := 1.0:
+	set(value):
+		max_camera_distance = value
+		camera_container.max_distance = max_camera_distance
+
+@onready
+var camera_container : CameraContainer = (func()->CameraContainer:
+	var cam_con : CameraContainer = load("uid://c7g5rw3652nl2").instantiate()
+	cam_con.target = pitch_pivot
+	player.add_sibling.call_deferred(cam_con)
+	cam_con.max_distance = max_camera_distance
+	return cam_con
+	).call()
+
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
