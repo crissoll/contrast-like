@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://k20j6bl4oik8"]
 
-[ext_resource type="Script" uid="uid://d3f1wcb8k71cm" path="res://scripts/player/player.gd" id="1_w60vo"]
-[ext_resource type="Script" uid="uid://csy7y5nqs43wx" path="res://scripts/player/StateMachine/state_machine.gd" id="3_m4qmx"]
-[ext_resource type="Script" uid="uid://dfoxymrii5hcj" path="res://scripts/player/StateMachine/States/Idle.gd" id="4_1hg5p"]
-[ext_resource type="Script" uid="uid://bpm1asjueuurv" path="res://scripts/player/StateMachine/States/Move.gd" id="4_314tu"]
+[ext_resource type="PackedScene" uid="uid://boghcd8vbk00t" path="res://scenes/player/camera_system.tscn" id="1_w60vo"]
+[ext_resource type="Script" uid="uid://0hiq77llmce2" path="res://scenes/tests/test_camera/temp_move_handler.gd" id="2_m4qmx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u25ut"]
 radius = 0.6
@@ -17,9 +15,8 @@ size = Vector3(1, 0.55885315, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_u25ut"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1719097324 node_paths=PackedStringArray("camera_target", "visuals")]
+[node name="Player" type="CharacterBody3D" unique_id=1719097324]
 floor_max_angle = 1.553343
-<<<<<<< Updated upstream
 
 [node name="CameraHandler" parent="." unique_id=1125210116 node_paths=PackedStringArray("camera_allignment_target_node") instance=ExtResource("1_w60vo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
@@ -31,45 +28,21 @@ script = ExtResource("2_m4qmx")
 move_speed = 20.0
 
 [node name="AreaLight3D" type="OmniLight3D" parent="." unique_id=1053713815]
-=======
-script = ExtResource("1_w60vo")
-camera_target = NodePath("CameraTarget")
-visuals = NodePath("Visuals")
-
-[node name="TempMoveSyst" type="Node3D" parent="." unique_id=102906964]
->>>>>>> Stashed changes
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1053617458]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9748261, 0)
 shape = SubResource("CapsuleShape3D_u25ut")
 
-[node name="Visuals" type="Node3D" parent="." unique_id=2069406185]
+[node name="Model" type="Node3D" parent="." unique_id=2069406185]
 transform = Transform3D(0.6232473, 0, 0, 0, 1, 0, 0, 0, 0.6335432, 0, 0.6312103, 0)
 
-[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=516528943]
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=516528943]
 mesh = SubResource("BoxMesh_u25ut")
 
-[node name="Head" type="MeshInstance3D" parent="Visuals" unique_id=507906054]
+[node name="Head" type="MeshInstance3D" parent="Model" unique_id=507906054]
 transform = Transform3D(0.6464411, 0, 0, 0, 0.6464411, 0, 0, 0, 0.6464411, 0, 0.8131645, 0)
 mesh = SubResource("BoxMesh_8afob")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals" unique_id=1523881939]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" unique_id=1523881939]
 transform = Transform3D(1.4194621, 0, 8.569309e-09, -6.204666e-08, 1.1464113e-15, 0.19604294, 0, -0.6, 3.745764e-16, 0, 1.104, 0)
 mesh = SubResource("PrismMesh_u25ut")
-
-[node name="StateMachine" type="Node" parent="." unique_id=1946093381 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_m4qmx")
-initial_state = NodePath("IdleState")
-
-[node name="IdleState" type="Node" parent="StateMachine" unique_id=1920451697]
-script = ExtResource("4_1hg5p")
-
-[node name="MoveState" type="Node" parent="StateMachine" unique_id=1368832318]
-script = ExtResource("4_314tu")
-metadata/_custom_type_script = "uid://bpm1asjueuurv"
-
-[node name="CameraTarget" type="Marker3D" parent="." unique_id=636592759]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8043919, 1.9859409)
-
-[node name="AreaLight3D" type="OmniLight3D" parent="." unique_id=1053713815]
-visible = false

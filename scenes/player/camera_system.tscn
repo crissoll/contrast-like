@@ -4,6 +4,7 @@
 
 [node name="CameraHandler" type="Node3D" unique_id=1125210116]
 script = ExtResource("1_6firl")
+vertical_rotation_max_value = 1.0471975511965976
 
 [node name="PitchPivot" type="Node3D" parent="." unique_id=875655367]
 

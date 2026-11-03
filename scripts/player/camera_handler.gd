@@ -1,27 +1,21 @@
 class_name CompCameraHandler
 extends Node3D
 
-@export var target : Node3D
-@export var horizontal_sensitivity := 0.01
-@export var vertical_sensitivity := 0.01
-@export var follow_speed := 12.0
+@export
+var horizontal_sensitivity := 0.01
+@export
+var vertical_sensitivity := 0.01
 
-<<<<<<< Updated upstream
 @export_range(0.1,10,0.1)
 var mouse_sensitivity := 1.0
 
 @export_range(0, 90, 0.001, "radians_as_degrees")
-=======
-@export_range(0, 90, 0.001, "radians_as_degrees") 
->>>>>>> Stashed changes
 var max_pitch : float = PI * 1/4
 @export_range(-90,0, 0.001, "radians_as_degrees")
 var min_pitch : float = - PI * 1/4
 
-@onready var pitch_pivot: Node3D = $PitchPivot
-
-var yaw := 0.0
-var pitch := 0.0
+@onready
+var pitch_pivot: Node3D = $PitchPivot
 
 @export_group("Camera Aligment")
 @export 
@@ -54,7 +48,6 @@ func _physics_process(delta: float) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-<<<<<<< Updated upstream
 	
 	var buttons_input_vector := Input.get_vector(
 		&"camera_left",&"camera_right",
@@ -78,20 +71,3 @@ func rotate_view(rotation_vector:Vector2) -> void:
 		pitch_pivot.rotation.x, 
 		min_pitch, 
 		max_pitch)
-=======
-			
-	if target:
-		global_position = global_position.lerp(target.global_position, 1.0 - exp(-follow_speed * delta))
-	rotation.y = yaw
-	pitch_pivot.rotation.x = pitch
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		yaw -= event.relative.x * horizontal_sensitivity
-		pitch = clamp(pitch - event.relative.y * vertical_sensitivity, min_pitch, max_pitch)
-		
-		
-		
-func get_planar_basis() -> Basis:
-	return Basis(Vector3.UP, yaw)
->>>>>>> Stashed changes
