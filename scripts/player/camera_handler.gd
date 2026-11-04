@@ -21,15 +21,33 @@ var pitch_pivot: Node3D = $PitchPivot
 @export 
 var camera_allignment_target_node : Node3D
 
-@export_range(0, 6*PI, 0.001, "suffix:rad/s")
+@export_range(0, 10*PI, 0.001, "suffix:rad/s")
 var aligment_rotation_speed := PI/2
 var aligning_camera := false
+@onready
+var player: CharacterBody3D = $".."
+
+@export_group("Camera Padding")
+@export
+var max_camera_distance := 1.0:
+	set(value):
+		max_camera_distance = value
+		camera_container.max_distance = max_camera_distance
+
 
 @onready
-var global_pos_at_last_input := global_position
-var portrait_mode_radius_passed : bool = false
+var camera_container : CameraContainer = (func()->CameraContainer:
+	var cam_con : CameraContainer = load("uid://c7g5rw3652nl2").instantiate()
+	cam_con.target = pitch_pivot
+	player.add_sibling.call_deferred(cam_con)
+	cam_con.max_distance = max_camera_distance
+	return cam_con
+	).call()
+
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"camera_align"):
@@ -62,9 +80,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_view(event.relative * mouse_sensitivity)
 
+
 func rotate_view(rotation_vector:Vector2) -> void:
-	global_pos_at_last_input = global_position
-	portrait_mode_radius_passed = false
 	rotate_y(-rotation_vector.x * horizontal_sensitivity)
 	pitch_pivot.rotation.x -= rotation_vector.y * vertical_sensitivity
 	pitch_pivot.rotation.x = clampf(
