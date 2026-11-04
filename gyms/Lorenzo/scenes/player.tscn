@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dggqd7qmgkdq0"]
+
+[ext_resource type="Script" uid="uid://cexo12t1pvsdr" path="res://gyms/Lorenzo/scripts/Player/player.gd" id="1_wph10"]
+[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://gyms/Cristiano/scripts/player/camera_handler.gd" id="2_t0fl0"]
+[ext_resource type="Script" uid="uid://bnvc3ssbtpgkb" path="res://gyms/Lorenzo/scripts/Player/StateMachine/StateMachine.gd" id="3_t0fl0"]
+[ext_resource type="Script" uid="uid://d3408dfwqbgf7" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/IdleState.gd" id="4_xqvnj"]
+[ext_resource type="Script" uid="uid://lr3u0xme85hw" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/JumpState.gd" id="5_3nnsb"]
+[ext_resource type="Script" uid="uid://bw84oqx7ffhq5" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/MoveState.gd" id="6_3nnsb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_au7uu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_au7uu"]
+
+[node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "visuals")]
+script = ExtResource("1_wph10")
+camera_rig = NodePath("CompCameraHandler")
+visuals = NodePath("MeshInstance3D")
+
+[node name="CompCameraHandler" type="Node3D" parent="." unique_id=805582829 node_paths=PackedStringArray("camera_allignment_target_node")]
+script = ExtResource("2_t0fl0")
+camera_allignment_target_node = NodePath("../CameraRotationTarget")
+metadata/_custom_type_script = "uid://bu2kxtd3oeclv"
+
+[node name="PitchPivot" type="Node3D" parent="CompCameraHandler" unique_id=606897643]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1501373459]
+shape = SubResource("CapsuleShape3D_au7uu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=929532530]
+mesh = SubResource("CapsuleMesh_au7uu")
+
+[node name="CameraRotationTarget" type="Node3D" parent="." unique_id=993911557]
+
+[node name="StateMachine" type="Node" parent="." unique_id=1734214086 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_t0fl0")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://bnvc3ssbtpgkb"
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1741303835]
+script = ExtResource("4_xqvnj")
+
+[node name="JumpState" type="Node" parent="StateMachine" unique_id=1856040129]
+script = ExtResource("5_3nnsb")
+
+[node name="MoveState" type="Node" parent="StateMachine" unique_id=2025890776]
+script = ExtResource("6_3nnsb")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://boghcd8vbk00t"]
 
-[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://scripts/player/camera_handler.gd" id="1_6firl"]
+[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://gyms/Cristiano/scripts/player/camera_handler.gd" id="1_6firl"]
 
 [node name="CameraHandler" type="Node3D" unique_id=1125210116]
 script = ExtResource("1_6firl")

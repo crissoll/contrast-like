@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7g5rw3652nl2"]
 
-[ext_resource type="Script" uid="uid://8u2pl0p6d72a" path="res://scripts/player/camera_container.gd" id="1_8483x"]
+[ext_resource type="Script" uid="uid://8u2pl0p6d72a" path="res://gyms/Cristiano/scripts/player/camera_container.gd" id="1_8483x"]
 
 [node name="CameraContainer" type="Node3D" unique_id=1407488274]
 script = ExtResource("1_8483x")

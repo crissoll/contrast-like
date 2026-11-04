@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2sd4uc3h0iv5"]
 
-[ext_resource type="PackedScene" uid="uid://k20j6bl4oik8" path="res://scenes/tests/test_camera/temp_player.tscn" id="1_k60hx"]
+[ext_resource type="PackedScene" uid="uid://k20j6bl4oik8" path="res://gyms/Cristiano/scenes/tests/test_camera/temp_player.tscn" id="1_k60hx"]
 
 [sub_resource type="Gradient" id="Gradient_a1bje"]
 colors = PackedColorArray(0, 0.3764706, 0, 1, 0, 0.68235296, 0, 1)
