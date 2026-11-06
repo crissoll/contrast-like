@@ -1,7 +1,7 @@
 class_name StateMachine extends Node
 
 ## Emitted right after a state transition.
-signal state_changed()
+signal state_changed(previous_state: State, new_state: State)
 
 ## The initial state of the state machine. If not set, the first child node is used.
 @export var initial_state: State = null
@@ -11,15 +11,20 @@ signal state_changed()
 	return initial_state if initial_state != null else get_child(0)
 ).call()
 
+var player: Player
+
 
 func _ready() -> void:
+	player = owner as Player
 	# Connect to every state's finished signal to transition to the next state.
 	for state_node: State in find_children("*", "State"):
 		state_node.finished.connect(_transition_to_next_state)
-		state_node.player = owner as Player
+		state_node.player = player
 	# State machines usually access data from the root node of the scene they're part of: the owner.
 	# We wait for the owner to be ready to guarantee all the data and nodes the states may need are available.
-	await owner.ready
+	# If the owner is already ready, awaiting the signal would hang forever.
+	if not owner.is_node_ready():
+		await owner.ready
 	state.enter("")
 
 
@@ -32,6 +37,10 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Timers first, so every state reads up-to-date coyote / jump buffer values
+	# regardless of the node order in the tree.
+	if player:
+		player.update_timers(delta)
 	state.physics_update(delta)
 
 
@@ -40,8 +49,8 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
 		return
 
-	var previous_state_path := state.name
+	var previous_state := state
 	state.exit()
 	state = get_node(target_state_path)
-	state.enter(previous_state_path, data)
-	state_changed.emit()
+	state.enter(previous_state.name, data)
+	state_changed.emit(previous_state, state)

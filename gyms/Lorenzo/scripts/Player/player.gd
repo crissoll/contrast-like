@@ -14,10 +14,11 @@ extends CharacterBody3D
 #region Movement
 @export_group("Movement")
 @export var walk_speed := 3.0
-@export var run_speed := 6.0
+@export var run_speed := 6.0 #not used for now
 @export var acceleration := 20.0
 @export var deceleration := 25.0
 @export var air_acceleration := 8.0
+@export var air_deceleration := 10.0
 @export var rotation_speed := 12.0
 @export var visuals_rotation_offset := 0.0
 #endregion 
@@ -26,33 +27,42 @@ extends CharacterBody3D
 #region Jump And Gravity
 @export_group("Jump And Gravity")
 @export var jump_velocity := 6.0
-@export var gravity_scale := 1.0
+@export var overall_gravity_scale := 1.5
+@export var jump_interrupted_gravity_multiplier := 2.2
 @export var max_fall_speed := 40.0
+@export var falling_gravity_multiplier := 1.7
 @export var coyote_time := 0.12
 @export var jump_buffer_time := 0.12
+@export var max_air_jumps := 1
+@export var strength_double_jump : float = 1.8
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _coyote_timer := 0.0
 var _jump_buffer_timer := 0.0
+var _air_jumps_left := 0
+var _jump_started := false
 #endregion 
 
 
 #region Lifecycle
-func _physics_process(delta: float) -> void:
-	_update_timers(delta)
 
+func update_timers(delta: float) -> void:
+	# _jump_started only checks the first frame after having pressed space, after it becomes false since we are not on floor
+	if _jump_started and not is_on_floor():
+		_jump_started = false
 
-func _update_timers(delta: float) -> void:
-	if is_on_floor():
+	if is_grounded(): #checks wether we are on the ground AND we didn't start jumping. if we actually jump _coyote_timer = 0
 		_coyote_timer = coyote_time
+		_air_jumps_left = 0 #you cannot double jump from ground
 	else:
-		_coyote_timer = maxf(_coyote_timer - delta, 0.0)
+		_coyote_timer = maxf(_coyote_timer - delta, 0.0) #when we start falling we decrease the timer of delta each frame
 
 	if Input.is_action_just_pressed("jump"):
 		_jump_buffer_timer = jump_buffer_time
 	else:
 		_jump_buffer_timer = maxf(_jump_buffer_timer - delta, 0.0)
+
 #endregion
 
 
@@ -81,6 +91,9 @@ func has_move_input() -> bool:
 
 func wants_jump() -> bool:
 	return _jump_buffer_timer > 0.0
+	
+func is_jump_held() -> bool:
+	return Input.is_action_pressed("jump")
 
 #endregion 
 
@@ -112,7 +125,7 @@ func apply_horizontal_movement(
 
 
 func apply_air_movement(direction: Vector3, speed: float, delta: float) -> void:
-	apply_horizontal_movement(direction, speed, delta, air_acceleration, air_acceleration)
+	apply_horizontal_movement(direction, speed, delta, air_acceleration, air_deceleration)
 
 
 func stop_horizontal() -> void:
@@ -122,28 +135,45 @@ func stop_horizontal() -> void:
 
 
 #region Jump And Gravity
+## Always applied, also on the floor: the small downward push keeps the body glued
+## to slopes and steps, and move_and_slide() cancels it when there is ground below.
 func apply_gravity(delta: float, multiplier := 1.0) -> void:
-	if is_on_floor():
-		return
-	velocity.y -= gravity * gravity_scale * multiplier * delta
+	velocity.y -= gravity * overall_gravity_scale * multiplier * delta
 	velocity.y = maxf(velocity.y, -max_fall_speed)
 
 
+## On the floor and not in the frame right after a jump.
+func is_grounded() -> bool:
+	return is_on_floor() and not _jump_started
+
+
 func can_jump() -> bool:
-	return is_on_floor() or _coyote_timer > 0.0
+	return is_grounded() or _coyote_timer > 0.0
 
 
+## Jump from the ground (or coyote time). Recharges the air jumps.
 func try_jump() -> bool:
 	if wants_jump() and can_jump():
 		jump()
+		_air_jumps_left = max_air_jumps
 		return true
 	return false
+
+
+func can_air_jump() -> bool:
+	return _air_jumps_left > 0
+
+
+func air_jump(strength_multiplier := 1.0) -> void:
+	_air_jumps_left = maxi(_air_jumps_left - 1, 0)
+	jump(strength_multiplier)
 
 
 func jump(strength_multiplier := 1.0) -> void:
 	velocity.y = jump_velocity * strength_multiplier
 	_coyote_timer = 0.0
 	_jump_buffer_timer = 0.0
+	_jump_started = true
 #endregion
 
 

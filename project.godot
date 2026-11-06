@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ContrastLike"
-run/main_scene="uid://c2sd4uc3h0iv5"
+run/main_scene="uid://86kgiawf3qcs"
 config/features=PackedStringArray("4.7", "Forward Plus")
 
 [display]

@@ -3,6 +3,13 @@ extends Node
 
 signal finished(next_state_path: String, data: Dictionary)
 
+## State node names, use these instead of writing the strings by hand.
+const IDLE := &"IdleState"
+const MOVE := &"MoveState"
+const JUMP := &"JumpState"
+const FALL := &"FallState"
+const DOUBLE_JUMP := &"DoubleJumpState"
+
 var player : Player
 
 ## Called by the state machine when receiving unhandled input events.
@@ -30,3 +37,18 @@ func enter(previous_state_path: String, data := {}) -> void:
 ## to clean up the state.
 func exit() -> void:
 	pass
+
+
+## Asks the state machine to switch state. The switch happens immediately
+## (signals are synchronous), so return right after calling it.
+func transition_to(state_name: StringName, data := {}) -> void:
+	finished.emit(state_name, data)
+
+
+## If the player is on the floor, switches to Move or Idle and returns true.
+## Usage: `if check_landing(): return`
+func check_landing() -> bool:
+	if not player.is_on_floor():
+		return false
+	transition_to(MOVE if player.has_move_input() else IDLE)
+	return true

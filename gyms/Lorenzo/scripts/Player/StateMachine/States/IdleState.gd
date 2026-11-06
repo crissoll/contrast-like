@@ -4,19 +4,17 @@ func enter(previous_state_path: String, data := {}) -> void:
 	#future animation
 	print("idle")
 	pass
- 
- 
+
+
 func physics_update(delta: float) -> void:
-	player.apply_horizontal_movement(Vector3.ZERO, 0.0, delta)
+	var dir := player.get_move_direction()
+	player.apply_horizontal_movement(dir, player.walk_speed, delta)
 	player.apply_gravity(delta)
 	player.move_and_slide()
- 
+
 	if player.try_jump():
-		print("trying to jump")
-		finished.emit(&"JumpState", {})
+		transition_to(JUMP)
 	elif not player.is_on_floor():
-		print("not on floor")
-		finished.emit(&"FallState", {})
+		transition_to(FALL)
 	elif player.has_move_input():
-		print("trying to move")
-		finished.emit(&"MoveState", {})
+		transition_to(MOVE)
