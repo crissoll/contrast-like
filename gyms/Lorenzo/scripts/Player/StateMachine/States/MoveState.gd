@@ -6,9 +6,10 @@ func enter(previous_state_path: String, data := {}) -> void:
  
  
 func physics_update(delta: float) -> void:
-	var raw_input : Vector2 = player.get_input_vector()
-	player.apply_horizontal_movement((Vector3(raw_input.x,0,raw_input.y)), player.walk_speed, delta)
+	var dir := player.get_move_direction()
+	player.apply_horizontal_movement(dir, player.walk_speed, delta)
 	player.apply_gravity(delta)
+	player.rotate_visuals_towards(dir, delta)
 	player.move_and_slide()
  
 	if player.try_jump():

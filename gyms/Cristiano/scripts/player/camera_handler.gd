@@ -88,3 +88,6 @@ func rotate_view(rotation_vector:Vector2) -> void:
 		pitch_pivot.rotation.x, 
 		min_pitch, 
 		max_pitch)
+
+func get_planar_basis():
+	return global_basis
