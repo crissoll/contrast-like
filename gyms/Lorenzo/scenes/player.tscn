@@ -17,6 +17,7 @@
 size = Vector3(0.03314209, 0.24316406, 0.75161743)
 
 [node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "visuals")]
+collision_layer = 4
 script = ExtResource("1_wph10")
 camera_rig = NodePath("CompCameraHandler")
 visuals = NodePath("Visuals")
@@ -25,6 +26,7 @@ overall_gravity_scale = 1.4
 strength_double_jump = 0.9
 
 [node name="CompCameraHandler" type="Node3D" parent="." unique_id=805582829 node_paths=PackedStringArray("camera_allignment_target_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0104294, 0)
 script = ExtResource("2_t0fl0")
 horizontal_sensitivity = 0.001
 vertical_sensitivity = 0.001

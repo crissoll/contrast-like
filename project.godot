@@ -80,6 +80,7 @@ camera_align={
 
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Camera"
+3d_physics/layer_3="player"
 
 [physics]
 
