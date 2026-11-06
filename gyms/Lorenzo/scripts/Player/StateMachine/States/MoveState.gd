@@ -1,6 +1,7 @@
 extends State
 
 func enter(previous_state_path: String, data := {}) -> void:
+	print("moving")
 	#future animation
 	pass
  
@@ -16,5 +17,5 @@ func physics_update(delta: float) -> void:
 		finished.emit(&"JumpState", {})
 	elif not player.is_on_floor():
 		finished.emit(&"FallState", {})
-	elif player.has_move_input():
-		finished.emit(&"MoveState", {})
+	elif player.velocity.length() < 0.5 and !player.get_input_vector():
+		finished.emit(&"IdleState")

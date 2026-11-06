@@ -20,5 +20,3 @@ func physics_update(delta: float) -> void:
 	elif player.has_move_input():
 		print("trying to move")
 		finished.emit(&"MoveState", {})
-	else:
-		print("NONE")
