@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bjbckpc5ph54u"]
+
+[ext_resource type="Shader" uid="uid://b5n0ucmlsfrus" path="res://shaders/gradient/graident.gdshader" id="1_ngopb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ngopb")
+shader_parameter/color_arriba = Color(0.8763862, 0.7814037, 0.97484285, 1)
+shader_parameter/color_abajo = Color(0.26895952, 0.5644992, 0.7691968, 1)
+shader_parameter/altura_minima = -0.35
+shader_parameter/altura_maxima = 1.76

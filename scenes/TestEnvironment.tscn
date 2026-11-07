@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://kwrbu2vc8hg8"]
+
+[ext_resource type="Material" uid="uid://bjbckpc5ph54u" path="res://shaders/gradient/Gradient.tres" id="1_u7bsa"]
+[ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://Meshes/Env/TestCube.glb" id="2_yhw7g"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_77qcy"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_77qcy"]
+
+[node name="environment" type="Node3D" unique_id=1405314670]
+
+[node name="floor" type="MeshInstance3D" parent="." unique_id=1049706817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
+mesh = SubResource("PlaneMesh_vub1y")
+
+[node name="character" type="MeshInstance3D" parent="." unique_id=291548300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888149, 1.048752, 0)
+visible = false
+material_override = ExtResource("1_u7bsa")
+mesh = SubResource("CapsuleMesh_77qcy")
+
+[node name="colon" parent="." unique_id=397150939 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(2.9464545, 0, -0.56427467, 0, 9, 0, 0.56427467, 0, 2.9464545, -4.589836, -5.415294, 7.378007)
+
+[node name="colon2" parent="." unique_id=294527797 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(2.9464545, -0.56427467, 0.48867616, 0, 5.196152, 1.5000001, 0.56427467, 2.9464545, -2.5517044, 5.2525496, -4.65054, 4.326269)
+
+[node name="colon3" parent="." unique_id=457521226 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(-1.9528903, -0.6750363, -0.36824656, 0.2938705, -5.8303604, -0.37133324, -0.31600505, -1.2502934, 1.930416, -7.7167497, 13.296293, -3.7793083)
+
+[node name="colon4" parent="." unique_id=1230088347 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(3.0382524, -1.1999303, -1.3107096, -0.55240977, 7.6806803, -2.0616212, 1.2540944, 6.290255, 2.2672992, -9.473108, 5.1444383, 7.8019066)
+
+[node name="colon5" parent="." unique_id=950041170 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(2.9468617, 0.6180793, -0.5230286, 0, 8.373758, 1.0995036, 0.5621439, -3.2400851, 2.741812, 6.3947525, 2.4821062, -1.6853008)
+
+[node name="colon6" parent="." unique_id=195045148 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(-2.9591966, -0.50671136, -0.4632775, -0.12508479, -7.407636, 1.6992186, -0.4769784, 5.086271, 2.4285858, -14.507324, 15.1939535, -13.970482)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=835150337]
+transform = Transform3D(0.10799931, 0.2573052, 0.96027607, 0, 0.9659258, -0.25881904, -0.99415094, 0.02795228, 0.10431932, 5.5506477, 1.0797596, 4.0827827)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1023041451]
+transform = Transform3D(-3.059797e-05, 0, 700, 0, 700, 0, -700, 0, -3.059797e-05, -123.373474, 100.434326, -65.128494)
+mesh = SubResource("QuadMesh_77qcy")
