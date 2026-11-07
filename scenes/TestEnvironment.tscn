@@ -3,8 +3,12 @@
 [ext_resource type="Material" uid="uid://bjbckpc5ph54u" path="res://shaders/gradient/Gradient.tres" id="1_u7bsa"]
 [ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://Meshes/Env/TestCube.glb" id="2_yhw7g"]
 [ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://Meshes/Env/wall.glb" id="3_yhw7g"]
+[ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://shaders/noise/noise.gdshader" id="4_xf2xp"]
 
 [sub_resource type="Environment" id="Environment_77qcy"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.001
+volumetric_fog_albedo = Color(0.72992647, 0.8090403, 0.9852132, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
 size = Vector2(100, 100)
@@ -12,6 +16,24 @@ size = Vector2(100, 100)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_77qcy"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_77qcy"]
+
+[sub_resource type="Gradient" id="Gradient_oqwq7"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_77qcy"]
+gradient = SubResource("Gradient_oqwq7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6s73"]
+shader = ExtResource("4_xf2xp")
+shader_parameter/noise_scale = 1.0
+shader_parameter/movement_dir = Vector3(0, 0, 0)
+shader_parameter/density_mult = 0.5
+shader_parameter/albedoColor = Color(0, 0, 0, 1)
+shader_parameter/emissionColor = Color(0, 0, 0, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_77qcy")
+shader_parameter/fade_out_height = 2.0
+shader_parameter/fade_out_distance = 1.5
+shader_parameter/fade_out_horiz = 2.0
+shader_parameter/colorRand = 0.0
 
 [node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
 
@@ -59,7 +81,6 @@ transform = Transform3D(0.10799934, 0.25730523, 0.96027607, 0, 0.9659258, -0.258
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1023041451]
 transform = Transform3D(-3.059797e-05, 0, 700, 0, 700, 0, -700, 0, -3.059797e-05, -123.373474, 100.434326, -65.128494)
-visible = false
 mesh = SubResource("QuadMesh_77qcy")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2140834640]
@@ -79,3 +100,7 @@ light_color = Color(0.4654631, 0.7107699, 0.99999887, 1)
 omni_range = 49.333
 omni_attenuation = 0.902
 omni_shadow_mode = 0
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1289444756]
+transform = Transform3D(40, 0, 0, 0, 63.592, 0, 0, 0, 63.592, 0, 0, 0)
+material = SubResource("ShaderMaterial_j6s73")
