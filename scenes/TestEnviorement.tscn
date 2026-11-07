@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://kwrbu2vc8hg8"]
+
+[ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://Meshes/Env/TestCube.glb" id="1_ruhce"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_77qcy"]
+
+[node name="Node3D" type="Node3D" unique_id=1405314670]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1049706817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
+mesh = SubResource("PlaneMesh_vub1y")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=291548300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888149, 1.048752, 0)
+mesh = SubResource("CapsuleMesh_77qcy")
+
+[node name="TestCube" parent="." unique_id=397150939 instance=ExtResource("1_ruhce")]
+transform = Transform3D(2.9464545, 0, -0.56427467, 0, 6, 0, 0.56427467, 0, 2.9464545, -5.2572665, 0, 2.175693)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=835150337]
+transform = Transform3D(0.10799931, 0.2573052, 0.96027607, 0, 0.9659258, -0.25881904, -0.99415094, 0.02795228, 0.10431932, 5.5506477, 1.0797596, 4.0827827)
