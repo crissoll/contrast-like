@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://2huvejtn5nol"]
+
+[ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://shaders/noise/noise.gdshader" id="1_g5l85"]
+
+[resource]
+shader = ExtResource("1_g5l85")
+shader_parameter/noise_scale = 1.0
+shader_parameter/movement_dir = Vector3(0, 0, 0)
+shader_parameter/density_mult = 0.5
+shader_parameter/albedoColor = Color(0, 0, 0, 1)
+shader_parameter/emissionColor = Color(0, 0, 0, 1)
+shader_parameter/fade_out_height = 2.0
+shader_parameter/fade_out_distance = 1.5
+shader_parameter/fade_out_horiz = 0.0
+shader_parameter/colorRand = 0.0

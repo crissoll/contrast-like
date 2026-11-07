@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://Meshes/Env/TestCube.glb" id="2_yhw7g"]
 [ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://Meshes/Env/wall.glb" id="3_yhw7g"]
 
+[sub_resource type="Environment" id="Environment_77qcy"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
 size = Vector2(100, 100)
 
@@ -11,7 +13,10 @@ size = Vector2(100, 100)
 
 [sub_resource type="QuadMesh" id="QuadMesh_77qcy"]
 
-[node name="environment" type="Node3D" unique_id=1405314670]
+[node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2087690493]
+environment = SubResource("Environment_77qcy")
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=1049706817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
@@ -43,6 +48,9 @@ transform = Transform3D(2.9464545, -0.56427467, 0.48867616, 0, 5.196152, 1.50000
 [node name="colon" parent="Columns" unique_id=397150939 instance=ExtResource("2_yhw7g")]
 transform = Transform3D(2.9464545, 0, -0.56427467, 0, 9, 0, 0.56427467, 0, 2.9464545, -4.589836, -5.415294, 7.378007)
 
+[node name="colon7" parent="Columns" unique_id=1894329393 instance=ExtResource("2_yhw7g")]
+transform = Transform3D(2.9464545, -0.4381351, -0.54504746, 0, 8.693333, -0.7764571, 0.5642747, 2.2877955, 2.8460565, -0.65914065, -4.638837, -13.146776)
+
 [node name="wall" parent="." unique_id=1428330647 instance=ExtResource("3_yhw7g")]
 transform = Transform3D(-6.119594e-07, 0, 14, 0, 14, 0, -14, 0, -6.119594e-07, -19.48525, 8.241871, 0.9638928)
 
@@ -53,3 +61,21 @@ transform = Transform3D(0.10799934, 0.25730523, 0.96027607, 0, 0.9659258, -0.258
 transform = Transform3D(-3.059797e-05, 0, 700, 0, 700, 0, -700, 0, -3.059797e-05, -123.373474, 100.434326, -65.128494)
 visible = false
 mesh = SubResource("QuadMesh_77qcy")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2140834640]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -71, 54, 6.556708e-07)
+light_color = Color(0.9098078, 0.99999994, 0.9989149, 1)
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = 6.228
+shadow_opacity = 0.85
+shadow_blur = 0.89
+spot_range = 933.482
+spot_attenuation = -0.38
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=671542373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+light_color = Color(0.4654631, 0.7107699, 0.99999887, 1)
+omni_range = 49.333
+omni_attenuation = 0.902
+omni_shadow_mode = 0
