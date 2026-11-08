@@ -1,14 +1,16 @@
 class_name State
 extends Node
 
-signal finished(next_state_path: String, data: Dictionary)
+signal finished(next_state: States, data: Dictionary)
 
-## State node names, use these instead of writing the strings by hand.
-const IDLE := &"IdleState"
-const MOVE := &"MoveState"
-const JUMP := &"JumpState"
-const FALL := &"FallState"
-const DOUBLE_JUMP := &"DoubleJumpState"
+enum States {
+	NULL,
+	IDLE,
+	MOVE,
+	JUMP,
+	FALL,
+	DOUBLE_JUMP,
+}
 
 var gravity_scale := 1.0
 @export_group("")
@@ -33,7 +35,7 @@ func physics_update(_delta: float) -> void:
 
 ## Called by the state machine upon changing the active state. The `data` parameter
 ## is a dictionary with arbitrary data the state can use to initialize itself.
-func enter(previous_state_path: String, data := {}) -> void:
+func enter(previous_state: States, data := {}) -> void:
 	pass
 
 
@@ -45,8 +47,8 @@ func exit() -> void:
 
 ## Asks the state machine to switch state. The switch happens immediately
 ## (signals are synchronous), so return right after calling it.
-func transition_to(state_name: StringName, data := {}) -> void:
-	finished.emit(state_name, data)
+func transition_to(state: States, data := {}) -> void:
+	finished.emit(state, data)
 
 
 ## If the player is on the floor, switches to Move or Idle and returns true.
@@ -54,5 +56,5 @@ func transition_to(state_name: StringName, data := {}) -> void:
 func check_landing() -> bool:
 	if not player.is_on_floor():
 		return false
-	transition_to(MOVE if player.has_move_input() else IDLE)
+	transition_to(States.MOVE if player.has_move_input() else States.IDLE)
 	return true

@@ -7,9 +7,16 @@
 [ext_resource type="Script" uid="uid://b6dem46a68n4" path="res://scripts/player/state_machine/states/fall_state.gd" id="5_rdwej"]
 [ext_resource type="Script" uid="uid://cuaglqkk0gxt4" path="res://scripts/player/state_machine/states/double_jump_state.gd" id="6_72nlc"]
 
-[node name="StateMachine" type="Node" unique_id=1389398072 node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" unique_id=1389398072 node_paths=PackedStringArray("states")]
 script = ExtResource("1_rcgc1")
-initial_state = NodePath("IdleState")
+states = {
+0: null,
+1: NodePath("IdleState"),
+2: NodePath("MoveState"),
+3: NodePath("JumpState"),
+4: NodePath("FallState"),
+5: NodePath("DoubleJumpState")
+}
 metadata/_custom_type_script = "uid://bnvc3ssbtpgkb"
 
 [node name="IdleState" type="Node" parent="." unique_id=1548193698]

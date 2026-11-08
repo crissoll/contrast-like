@@ -4,12 +4,15 @@ class_name StateMachine extends Node
 signal state_changed(previous_state: State, new_state: State)
 
 ## The initial state of the state machine. If not set, the first child node is used.
-@export var initial_state: State = null
+@export 
+var initial_state: State.States = State.States.IDLE
 
 ## The current state of the state machine.
-@onready var state: State = (func get_initial_state() -> State:
-	return initial_state if initial_state != null else get_child(0)
-).call()
+@onready 
+var state: State.States = initial_state
+
+@export
+var states : Dictionary[State.States,State]
 
 var player: Player
 
@@ -24,15 +27,15 @@ func _ready() -> void:
 	# If the owner is already ready, awaiting the signal would hang forever.
 	if not owner.is_node_ready():
 		await owner.ready
-	state.enter("")
+	states[state].enter(State.States.NULL)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	state.handle_input(event)
+	states[state].handle_input(event)
 
 
 func _process(delta: float) -> void:
-	state.update(delta)
+	states[state].update(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -40,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	# regardless of the node order in the tree.
 	if player:
 		player.update_timers(delta)
-	state.physics_update(delta)
+	states[state].physics_update(delta)
 	
 	var dir := player.get_move_direction()
 	
@@ -49,20 +52,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		player.apply_air_movement(dir, player.walk_speed, delta)
 	
-	player.apply_gravity(delta,state.gravity_scale)
+	player.apply_gravity(delta,states[state].gravity_scale)
 	
 	player.rotate_visuals_towards(dir, delta)
 	
 	player.move_and_slide()
 
 
-func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
-	if not has_node(target_state_path):
-		printerr(owner.name + ": Trying to transition to state " + target_state_path + " but it does not exist.")
-		return
-
+func _transition_to_next_state(target_state: State.States, data: Dictionary = {}) -> void:
+	
 	var previous_state := state
-	state.exit()
-	state = get_node(target_state_path)
-	state.enter(previous_state.name, data)
+	state = target_state
+	states[state].enter(previous_state, data)
 	state_changed.emit(previous_state, state)
