@@ -7,9 +7,8 @@ func enter(_previous_state: States, _data := {}) -> void:
 	pass
 
 
-func physics_update(delta: float) -> void:
-	var dir := player.get_move_direction()
-	
+func physics_update(_delta: float) -> void:
+
 	if player.velocity.y > 0 and not player.is_jump_held():
 		gravity_scale = player.jump_interrupted_gravity_multiplier
 	else:

@@ -7,7 +7,6 @@ func enter(_previous_state: States, _data := {}) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	var dir := player.get_move_direction()
 
 	if player.try_jump():
 		transition_to(States.JUMP)

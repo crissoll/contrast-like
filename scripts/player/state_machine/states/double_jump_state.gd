@@ -6,7 +6,7 @@ func enter(_previous_state: States, _data := {}) -> void:
 	player.air_jump(player.strength_double_jump)
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if check_landing():
 		return
 	# Only matters if max_air_jumps > 1.
