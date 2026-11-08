@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dggqd7qmgkdq0"]
 
-[ext_resource type="Script" uid="uid://cexo12t1pvsdr" path="res://gyms/Lorenzo/scripts/Player/player.gd" id="1_wph10"]
-[ext_resource type="PackedScene" uid="uid://da8jmhf0sdugr" path="res://gyms/Lorenzo/scenes/comp_camera_handler.tscn" id="2_t0fl0"]
-[ext_resource type="PackedScene" uid="uid://bhkad377uwbnm" path="res://gyms/Lorenzo/scenes/state_machine.tscn" id="3_t0fl0"]
+[ext_resource type="Script" uid="uid://cexo12t1pvsdr" path="res://scripts/player/player.gd" id="1_wph10"]
+[ext_resource type="PackedScene" uid="uid://da8jmhf0sdugr" path="res://scenes/comp_camera_handler.tscn" id="2_t0fl0"]
+[ext_resource type="PackedScene" uid="uid://bhkad377uwbnm" path="res://scenes/state_machine.tscn" id="3_t0fl0"]
+[ext_resource type="PackedScene" uid="uid://c7g5rw3652nl2" path="res://scenes/player/camera_container.tscn" id="3_vm3kk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_au7uu"]
 
@@ -22,6 +23,7 @@ strength_double_jump = 0.9
 
 [node name="CompCameraHandler" parent="." unique_id=2084906784 node_paths=PackedStringArray("camera_allignment_target_node") instance=ExtResource("2_t0fl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0104294, 0)
+camera_container_scene = ExtResource("3_vm3kk")
 camera_allignment_target_node = NodePath("../CameraRotationTarget")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1501373459]

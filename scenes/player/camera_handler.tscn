@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ns2e3g2kgujy"]
+
+[ext_resource type="Script" path="res://gyms/Lorenzo/scripts/player/camera_handler/camera_handler.gd" id="1_h1jen"]
+
+[node name="CompCameraHandler" type="Node3D" unique_id=2084906784]
+script = ExtResource("1_h1jen")
+horizontal_sensitivity = 0.001
+vertical_sensitivity = 0.001
+metadata/_custom_type_script = "uid://bu2kxtd3oeclv"
+
+[node name="PitchPivot" type="Node3D" parent="." unique_id=646721837]

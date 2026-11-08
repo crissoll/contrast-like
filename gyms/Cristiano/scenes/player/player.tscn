@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://ban2uu5v1g3uv"]
-
-[ext_resource type="PackedScene" uid="uid://boghcd8vbk00t" path="res://gyms/Cristiano/scenes/player/camera_system.tscn" id="1_8afob"]
-
-[node name="Player" type="CharacterBody3D" unique_id=758579912]
-
-[node name="CameraHandler" parent="." unique_id=1125210116 instance=ExtResource("1_8afob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)

@@ -17,6 +17,9 @@ var min_pitch : float = - PI * 1/4
 @onready
 var pitch_pivot: Node3D = $PitchPivot
 
+@export 
+var camera_container_scene : PackedScene
+
 @export_group("Camera Aligment")
 @export 
 var camera_allignment_target_node : Node3D
@@ -37,7 +40,7 @@ var max_camera_distance := 1.0:
 
 @onready
 var camera_container : CameraContainer = (func()->CameraContainer:
-	var cam_con : CameraContainer = load("uid://c7g5rw3652nl2").instantiate()
+	var cam_con : CameraContainer = camera_container_scene.instantiate()
 	cam_con.target = pitch_pivot
 	player.add_sibling.call_deferred(cam_con)
 	cam_con.max_distance = max_camera_distance
