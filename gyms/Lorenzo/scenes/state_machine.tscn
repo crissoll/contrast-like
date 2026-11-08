@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bhkad377uwbnm"]
+
+[ext_resource type="Script" uid="uid://bnvc3ssbtpgkb" path="res://gyms/Lorenzo/scripts/Player/StateMachine/StateMachine.gd" id="1_rcgc1"]
+[ext_resource type="Script" uid="uid://d3408dfwqbgf7" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/IdleState.gd" id="2_nj5ew"]
+[ext_resource type="Script" uid="uid://lr3u0xme85hw" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/JumpState.gd" id="3_khlwg"]
+[ext_resource type="Script" uid="uid://bw84oqx7ffhq5" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/MoveState.gd" id="4_8g4x0"]
+[ext_resource type="Script" uid="uid://b6dem46a68n4" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/FallState.gd" id="5_rdwej"]
+[ext_resource type="Script" uid="uid://cuaglqkk0gxt4" path="res://gyms/Lorenzo/scripts/Player/StateMachine/States/DoubleJumpState.gd" id="6_72nlc"]
+
+[node name="StateMachine" type="Node" unique_id=1389398072 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_rcgc1")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://bnvc3ssbtpgkb"
+
+[node name="IdleState" type="Node" parent="." unique_id=1548193698]
+script = ExtResource("2_nj5ew")
+
+[node name="JumpState" type="Node" parent="." unique_id=1249917544]
+script = ExtResource("3_khlwg")
+
+[node name="MoveState" type="Node" parent="." unique_id=889651281]
+script = ExtResource("4_8g4x0")
+
+[node name="FallState" type="Node" parent="." unique_id=1332524631]
+script = ExtResource("5_rdwej")
+
+[node name="DoubleJumpState" type="Node" parent="." unique_id=340153898]
+script = ExtResource("6_72nlc")
