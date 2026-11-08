@@ -38,6 +38,10 @@ shader_parameter/fade_out_distance = 1.5
 shader_parameter/fade_out_horiz = 2.0
 shader_parameter/colorRand = 0.0
 
+[sub_resource type="BoxMesh" id="BoxMesh_77qcy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
+
 [node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2087690493]
@@ -79,12 +83,16 @@ transform = Transform3D(2.9464545, -0.4381351, -0.54504746, 0, 8.693333, -0.7764
 [node name="wall" parent="." unique_id=1428330647 instance=ExtResource("3_yhw7g")]
 transform = Transform3D(-6.119594e-07, 0, 14, 0, 14, 0, -14, 0, -6.119594e-07, -19.48525, 8.241871, 0.9638928)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=835150337]
-transform = Transform3D(0.10799934, 0.25730523, 0.96027607, 0, 0.9659258, -0.25881907, -0.99415094, 0.02795229, 0.10431935, 5.550659, 1.0797577, 4.082798)
+[node name="Cameras" type="Node3D" parent="." unique_id=2062688741]
+
+[node name="Camera3D" type="Camera3D" parent="Cameras" unique_id=835150337]
+transform = Transform3D(0.10799935, 0.25730523, 0.96027607, 0, 0.9659258, -0.25881907, -0.994151, 0.027952291, 0.10431936, 5.550659, 1.0797577, 4.082798)
+
+[node name="Camera3D2" type="Camera3D" parent="Cameras" unique_id=1338910827]
+transform = Transform3D(0.025629105, -0.467303, 0.88372564, -0.017381221, 0.8836742, 0.46777987, -0.9995204, -0.027349014, 0.01452548, 17.850035, 20.776693, 5.70401)
 
 [node name="TestWhiteBackdrop" type="MeshInstance3D" parent="." unique_id=1023041451]
 transform = Transform3D(-4.371139e-05, 0, 1000, 0, 1000, 0, -1000, 0, -4.371139e-05, -363.10504, 264.02307, -65.12848)
-visible = false
 mesh = SubResource("QuadMesh_77qcy")
 surface_material_override/0 = SubResource("StandardMaterial3D_77qcy")
 
@@ -111,3 +119,8 @@ spot_attenuation = -0.38
 [node name="FogVolume" type="FogVolume" parent="." unique_id=1289444756]
 transform = Transform3D(40, 0, 0, 0, 63.592, 0, 0, 0, 63.592, 0, 0, 0)
 material = SubResource("ShaderMaterial_j6s73")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1785191129]
+transform = Transform3D(80, 0, 0, 0, 1, 0, 0, 0, 100, 21.71373, 30.990051, 0.020767212)
+mesh = SubResource("BoxMesh_77qcy")
+surface_material_override/0 = SubResource("StandardMaterial3D_vub1y")
