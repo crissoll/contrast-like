@@ -1,11 +1,13 @@
-[gd_scene format=3 uid="uid://ns2e3g2kgujy"]
+[gd_scene format=3 uid="uid://dfbctumtaofr5"]
 
-[ext_resource type="Script" path="res://gyms/Lorenzo/scripts/player/camera_handler/camera_handler.gd" id="1_h1jen"]
+[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://scripts/player/camera_handler/camera_handler.gd" id="1_kpcom"]
+[ext_resource type="PackedScene" uid="uid://c7g5rw3652nl2" path="res://scenes/player/camera_container.tscn" id="2_0lwvc"]
 
 [node name="CompCameraHandler" type="Node3D" unique_id=2084906784]
-script = ExtResource("1_h1jen")
+script = ExtResource("1_kpcom")
 horizontal_sensitivity = 0.001
 vertical_sensitivity = 0.001
+camera_container_scene = ExtResource("2_0lwvc")
 metadata/_custom_type_script = "uid://bu2kxtd3oeclv"
 
 [node name="PitchPivot" type="Node3D" parent="." unique_id=646721837]
