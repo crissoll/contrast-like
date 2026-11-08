@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bhkad377uwbnm"]
 
-[ext_resource type="Script" uid="uid://bnvc3ssbtpgkb" path="res://scripts/player/state_machine/StateMachine.gd" id="1_rcgc1"]
-[ext_resource type="Script" uid="uid://d3408dfwqbgf7" path="res://scripts/player/state_machine/states/IdleState.gd" id="2_nj5ew"]
-[ext_resource type="Script" uid="uid://lr3u0xme85hw" path="res://scripts/player/state_machine/states/JumpState.gd" id="3_khlwg"]
-[ext_resource type="Script" uid="uid://bw84oqx7ffhq5" path="res://scripts/player/state_machine/states/MoveState.gd" id="4_8g4x0"]
-[ext_resource type="Script" uid="uid://b6dem46a68n4" path="res://scripts/player/state_machine/states/FallState.gd" id="5_rdwej"]
-[ext_resource type="Script" uid="uid://cuaglqkk0gxt4" path="res://scripts/player/state_machine/states/DoubleJumpState.gd" id="6_72nlc"]
+[ext_resource type="Script" uid="uid://bnvc3ssbtpgkb" path="res://scripts/player/state_machine/state_machine.gd" id="1_rcgc1"]
+[ext_resource type="Script" uid="uid://d3408dfwqbgf7" path="res://scripts/player/state_machine/states/idle_state.gd" id="2_nj5ew"]
+[ext_resource type="Script" uid="uid://lr3u0xme85hw" path="res://scripts/player/state_machine/states/jump_state.gd" id="3_khlwg"]
+[ext_resource type="Script" uid="uid://bw84oqx7ffhq5" path="res://scripts/player/state_machine/states/move_state.gd" id="4_8g4x0"]
+[ext_resource type="Script" uid="uid://b6dem46a68n4" path="res://scripts/player/state_machine/states/fall_state.gd" id="5_rdwej"]
+[ext_resource type="Script" uid="uid://cuaglqkk0gxt4" path="res://scripts/player/state_machine/states/double_jump_state.gd" id="6_72nlc"]
 
 [node name="StateMachine" type="Node" unique_id=1389398072 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_rcgc1")
