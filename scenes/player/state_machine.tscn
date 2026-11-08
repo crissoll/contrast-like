@@ -17,15 +17,12 @@ script = ExtResource("2_nj5ew")
 
 [node name="JumpState" type="Node" parent="." unique_id=1249917544]
 script = ExtResource("3_khlwg")
-movement_mode = 1
 
 [node name="MoveState" type="Node" parent="." unique_id=889651281]
 script = ExtResource("4_8g4x0")
 
 [node name="FallState" type="Node" parent="." unique_id=1332524631]
 script = ExtResource("5_rdwej")
-movement_mode = 1
 
 [node name="DoubleJumpState" type="Node" parent="." unique_id=340153898]
 script = ExtResource("6_72nlc")
-movement_mode = 1

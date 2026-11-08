@@ -10,17 +10,9 @@ const JUMP := &"JumpState"
 const FALL := &"FallState"
 const DOUBLE_JUMP := &"DoubleJumpState"
 
-
 var gravity_scale := 1.0
 @export_group("")
 var overwrite_gravity := false
-
-enum MovementModes {
-	GROUNDED,
-	AIR,
-}
-@export
-var movement_mode : MovementModes = MovementModes.GROUNDED
 
 var player : Player
 

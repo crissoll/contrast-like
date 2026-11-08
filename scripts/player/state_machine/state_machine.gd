@@ -44,9 +44,9 @@ func _physics_process(delta: float) -> void:
 	
 	var dir := player.get_move_direction()
 	
-	if state.movement_mode == State.MovementModes.GROUNDED:
+	if player.is_grounded():
 		player.apply_horizontal_movement(dir,player.walk_speed,delta)
-	elif state.movement_mode == State.MovementModes.AIR:
+	else:
 		player.apply_air_movement(dir, player.walk_speed, delta)
 	
 	player.apply_gravity(delta,state.gravity_scale)
