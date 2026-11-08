@@ -67,26 +67,24 @@ func update_timers(delta: float) -> void:
 
 
 #region Inputs
-func get_input_vector() -> Vector2:
+func get_move_input_vector() -> Vector2:
 	return Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 
 
 func get_move_direction() -> Vector3:
-	var input := get_input_vector()
+	var input := get_move_input_vector()
 	if input == Vector2.ZERO:
 		return Vector3.ZERO
 
-	var basis_ref := Basis.IDENTITY
-	if camera_rig:
-		basis_ref = camera_rig.get_planar_basis()
-
-	var dir := basis_ref * Vector3(input.x, 0.0, input.y)
+	var dir := camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
+	
+	# redundant since camera_rig doesn't rotate on y, but better safe than sorry
 	dir.y = 0.0
 	return dir.normalized()
 
 
 func has_move_input() -> bool:
-	return get_input_vector() != Vector2.ZERO
+	return get_move_input_vector() != Vector2.ZERO
 
 
 func wants_jump() -> bool:

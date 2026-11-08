@@ -89,5 +89,5 @@ func rotate_view(rotation_vector:Vector2) -> void:
 		min_pitch, 
 		max_pitch)
 
-func get_planar_basis():
+func get_planar_basis() -> Basis:
 	return global_basis
