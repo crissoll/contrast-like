@@ -4,13 +4,12 @@ func enter(previous_state_path: String, data := {}) -> void:
 	print("fall")
 	pass
 
+func _ready() -> void:
+	await get_parent().ready
+	gravity_scale = player.falling_gravity_multiplier
 
 func physics_update(delta: float) -> void:
 	var dir := player.get_move_direction()
-	player.apply_air_movement(dir, player.walk_speed, delta)
-	player.rotate_visuals_towards(dir, delta)
-	player.apply_gravity(delta,player.falling_gravity_multiplier)
-	player.move_and_slide()
 
 	if check_landing():
 		return

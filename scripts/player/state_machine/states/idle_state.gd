@@ -8,9 +8,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	var dir := player.get_move_direction()
-	player.apply_horizontal_movement(dir, player.walk_speed, delta)
-	player.apply_gravity(delta)
-	player.move_and_slide()
 
 	if player.try_jump():
 		transition_to(JUMP)

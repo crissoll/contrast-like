@@ -13,7 +13,6 @@ signal state_changed(previous_state: State, new_state: State)
 
 var player: Player
 
-
 func _ready() -> void:
 	player = owner as Player
 	# Connect to every state's finished signal to transition to the next state.
@@ -42,6 +41,19 @@ func _physics_process(delta: float) -> void:
 	if player:
 		player.update_timers(delta)
 	state.physics_update(delta)
+	
+	var dir := player.get_move_direction()
+	
+	if state.movement_mode == State.MovementModes.GROUNDED:
+		player.apply_horizontal_movement(dir,player.walk_speed,delta)
+	elif state.movement_mode == State.MovementModes.AIR:
+		player.apply_air_movement(dir, player.walk_speed, delta)
+	
+	player.apply_gravity(delta,state.gravity_scale)
+	
+	player.rotate_visuals_towards(dir, delta)
+	
+	player.move_and_slide()
 
 
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:

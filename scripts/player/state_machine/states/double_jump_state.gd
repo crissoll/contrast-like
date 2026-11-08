@@ -7,12 +7,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
-	var dir := player.get_move_direction()
-	player.apply_air_movement(dir, player.walk_speed, delta)
-	player.apply_gravity(delta)
-	player.rotate_visuals_towards(dir, delta)
-	player.move_and_slide()
-
 	if check_landing():
 		return
 	# Only matters if max_air_jumps > 1.
