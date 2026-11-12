@@ -4,11 +4,22 @@
 [ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://Meshes/Env/TestCube.glb" id="2_yhw7g"]
 [ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://Meshes/Env/wall.glb" id="3_yhw7g"]
 [ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://shaders/noise/noise.gdshader" id="4_xf2xp"]
+[ext_resource type="Shader" uid="uid://dvf542nmsehxa" path="res://scenes/film_grain.gdshader" id="5_oqwq7"]
 
 [sub_resource type="Environment" id="Environment_77qcy"]
+background_mode = 1
+background_color = Color(0, 0.036400244, 0.10249903, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.009031518, 0.044031605, 0.14486754, 1)
+tonemap_mode = 2
+glow_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.001
+volumetric_fog_density = 0.01
 volumetric_fog_albedo = Color(0.72992647, 0.8090403, 0.9852132, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76q71"]
+albedo_color = Color(0.067032225, 0.24775872, 0.45632547, 1)
+emission_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
 size = Vector2(100, 100)
@@ -42,6 +53,17 @@ shader_parameter/colorRand = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_77qcy"]
+emission_shape = 3
+emission_box_extents = Vector3(400, 150, 500)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vub1y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77qcy"]
+shader = ExtResource("5_oqwq7")
+shader_parameter/grain_strength = 0.05
+
 [node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2087690493]
@@ -49,6 +71,7 @@ environment = SubResource("Environment_77qcy")
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=1049706817]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
+material_override = SubResource("StandardMaterial3D_76q71")
 mesh = SubResource("PlaneMesh_vub1y")
 
 [node name="character" type="MeshInstance3D" parent="." unique_id=291548300]
@@ -75,7 +98,7 @@ transform = Transform3D(-1.9528903, -0.6750363, -0.36824656, 0.2938705, -5.83036
 transform = Transform3D(4.95134, -0.6958646, 0.60263723, -3.7855173e-07, 8.660254, 2.5, 0.6958653, 4.95134, -4.2879863, 7.1967, 3.0258794, 12.0142565)
 
 [node name="colon" parent="Columns" unique_id=397150939 instance=ExtResource("2_yhw7g")]
-transform = Transform3D(2.2923417, 0, -0.4390057, 0, 7, 0, 0.4390057, 0, 2.2923417, -4.7194653, 8.136485, 8.160358)
+transform = Transform3D(1.5263609, 0, 1.7657235, 0, 6.9999995, 0, -1.7657235, 0, 1.5263609, -4.7194653, 8.136485, 8.160358)
 
 [node name="colon7" parent="Columns" unique_id=1894329393 instance=ExtResource("2_yhw7g")]
 transform = Transform3D(2.9464545, -0.4381351, -0.54504746, 0, 8.693333, -0.7764571, 0.5642747, 2.2877955, 2.8460565, -0.65914065, -4.638837, -13.146776)
@@ -101,6 +124,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_77qcy")
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=671542373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 light_color = Color(0.4654631, 0.7107699, 0.99999887, 1)
+light_volumetric_fog_energy = 10.822
 omni_range = 49.333
 omni_attenuation = 0.902
 omni_shadow_mode = 0
@@ -114,7 +138,7 @@ shadow_transmittance_bias = 6.228
 shadow_opacity = 0.85
 shadow_blur = 0.89
 spot_range = 933.482
-spot_attenuation = -0.38
+spot_attenuation = -0.08
 
 [node name="FogVolume" type="FogVolume" parent="." unique_id=1289444756]
 transform = Transform3D(40, 0, 0, 0, 63.592, 0, 0, 0, 63.592, 0, 0, 0)
@@ -124,3 +148,18 @@ material = SubResource("ShaderMaterial_j6s73")
 transform = Transform3D(80, 0, 0, 0, 1, 0, 0, 0, 100, 21.71373, 30.990051, 0.020767212)
 mesh = SubResource("BoxMesh_77qcy")
 surface_material_override/0 = SubResource("StandardMaterial3D_vub1y")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2072044290]
+process_material = SubResource("ParticleProcessMaterial_77qcy")
+draw_pass_1 = SubResource("QuadMesh_vub1y")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=234362210]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=511082553]
+material = SubResource("ShaderMaterial_77qcy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
