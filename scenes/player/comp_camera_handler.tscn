@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://da8jmhf0sdugr"]
+
+[ext_resource type="Script" uid="uid://bu2kxtd3oeclv" path="res://scripts/player/camera_handler/camera_handler.gd" id="1_47dhd"]
+
+[node name="CompCameraHandler" type="Node3D" unique_id=2084906784]
+script = ExtResource("1_47dhd")
+horizontal_sensitivity = 0.001
+vertical_sensitivity = 0.001
+metadata/_custom_type_script = "uid://bu2kxtd3oeclv"
+
+[node name="PitchPivot" type="Node3D" parent="." unique_id=646721837]
