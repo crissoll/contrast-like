@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://k20j6bl4oik8"]
 
 [ext_resource type="PackedScene" uid="uid://boghcd8vbk00t" path="res://scenes/tests/test_camera/camera_system.tscn" id="1_w60vo"]
+[ext_resource type="PackedScene" uid="uid://c7g5rw3652nl2" path="res://scenes/player/camera_container.tscn" id="2_314tu"]
 [ext_resource type="Script" uid="uid://0hiq77llmce2" path="res://scenes/tests/test_camera/temp_move_handler.gd" id="2_m4qmx"]
-
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u25ut"]
 radius = 0.6
@@ -21,6 +21,7 @@ floor_max_angle = 1.553343
 
 [node name="CameraHandler" parent="." unique_id=1125210116 node_paths=PackedStringArray("camera_allignment_target_node") instance=ExtResource("1_w60vo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4787053, 0)
+camera_container_scene = ExtResource("2_314tu")
 camera_allignment_target_node = NodePath("../Model")
 aligment_rotation_speed = 24.999
 
