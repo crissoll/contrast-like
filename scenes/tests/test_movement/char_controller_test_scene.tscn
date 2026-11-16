@@ -1,43 +1,87 @@
 [gd_scene format=3 uid="uid://86kgiawf3qcs"]
 
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_j6ci1"]
+[ext_resource type="Script" uid="uid://cr0tufumawbev" path="res://scenes/tests/shadow_test/shadow_trigger_event.gd" id="2_5dnud"]
+[ext_resource type="Script" uid="uid://bwydn5w41em3e" path="res://scenes/tests/shadow_test/interactive_shadow.gd" id="2_i2vus"]
+[ext_resource type="Script" uid="uid://dov4mvput3h5p" path="res://scenes/tests/shadow_test/disable_collider_on_shadow.gd" id="3_i2vus"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j6ci1"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wqunc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_51ait"]
-sky_material = SubResource("ProceduralSkyMaterial_j6ci1")
+[sub_resource type="Sky" id="Sky_3bvwi"]
+sky_material = SubResource("ProceduralSkyMaterial_wqunc")
 
-[sub_resource type="Environment" id="Environment_p4dad"]
+[sub_resource type="Environment" id="Environment_5dnud"]
 background_mode = 2
-sky = SubResource("Sky_51ait")
+sky = SubResource("Sky_3bvwi")
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_gepqh"]
-size = Vector3(20, 0.1, 20)
+size = Vector3(80, 0.1, 80)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_au7uu"]
-size = Vector3(20, 0.1, 20)
+size = Vector3(80, 0.1, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_usvy1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_usvy1"]
 
 [node name="CharacterControllerTestScene" type="Node3D" unique_id=2059027252]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=368430323]
-environment = SubResource("Environment_p4dad")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=809632510]
+environment = SubResource("Environment_5dnud")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=527857650]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Player" parent="." unique_id=792214008 instance=ExtResource("1_j6ci1")]
+[node name="Player" parent="." unique_id=792214008 groups=["player"] instance=ExtResource("1_j6ci1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0499998, 0)
+collision_mask = 9
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1952382560]
-collision_layer = 3
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1952382560]
+collision_layer = 11
 collision_mask = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=600511667]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=600511667]
 mesh = SubResource("BoxMesh_gepqh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1132417981]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1132417981]
 shape = SubResource("BoxShape3D_au7uu")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=184581214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.865192, 12.986093)
+light_energy = 11.955
+shadow_enabled = true
+spot_range = 142.901
+spot_angle = 40.45734
+
+[node name="CastingShadowBox" type="StaticBody3D" parent="." unique_id=1140030052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -3.518993)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CastingShadowBox" unique_id=1769213018 node_paths=PackedStringArray("shadow_collision", "light")]
+mesh = SubResource("BoxMesh_usvy1")
+script = ExtResource("2_i2vus")
+shadow_collision = NodePath("../../BoxShadow/ShadowCollisionShape")
+light = NodePath("../../SpotLight3D")
+target_mask = 8
+extrusion_direction = Vector3(0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CastingShadowBox" unique_id=141000394]
+shape = SubResource("BoxShape3D_usvy1")
+
+[node name="BoxShadow" type="Area3D" parent="." unique_id=1180783219]
+collision_mask = 5
+
+[node name="ShadowTriggerEvent" type="Node" parent="BoxShadow" unique_id=862709742 node_paths=PackedStringArray("area")]
+script = ExtResource("2_5dnud")
+area = NodePath("..")
+
+[node name="DisableColliderOnShadow" type="Node" parent="BoxShadow" unique_id=1796011239 node_paths=PackedStringArray("area", "target_shape")]
+script = ExtResource("3_i2vus")
+area = NodePath("..")
+target_shape = NodePath("../../Floor/CollisionShape3D")
+
+[node name="ShadowCollisionShape" type="CollisionShape3D" parent="BoxShadow" unique_id=1687961853]
+
+[node name="CollidableShadow" type="StaticBody3D" parent="." unique_id=1889754967]
+collision_mask = 5
+
+[node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow" unique_id=1754292906]

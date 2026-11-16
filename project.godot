@@ -19,6 +19,10 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+player=""
+
 [input]
 
 move_forward={
@@ -81,6 +85,7 @@ camera_align={
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Camera"
 3d_physics/layer_3="player"
+3d_physics/layer_4="shadow_receiver"
 
 [physics]
 
