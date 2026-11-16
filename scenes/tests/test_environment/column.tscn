@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://w2iaiertg4jn"]
+
+[ext_resource type="PackedScene" uid="uid://cywhsibnduic1" path="res://assets/Meshes/Env/TestCube.glb" id="1_eoryh"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yxg1g"]
+points = PackedVector3Array(1, -1.5822608, 1.3278124, -1, -1.5822608, 1.3278124, 1, -1.5822608, -0.67244554, 0.9189507, 4.158164, -0.8210476, 0.14271736, 4.158164, -0.8210476, -1, -1.5822608, -0.67244554, 0.9189507, 4.158164, -1.5972714, 0.14271736, 4.158164, -1.5972714)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1282513265]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1457046402]
+shape = SubResource("ConvexPolygonShape3D_yxg1g")
+
+[node name="Column" type="Node3D" parent="." unique_id=1689563712]
+
+[node name="TestCube" parent="Column" unique_id=113975930 instance=ExtResource("1_eoryh")]

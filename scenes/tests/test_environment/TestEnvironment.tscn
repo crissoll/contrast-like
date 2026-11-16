@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://kwrbu2vc8hg8"]
+[gd_scene format=3 uid="uid://jvufi8crgcib"]
 
-[ext_resource type="Material" uid="uid://bjbckpc5ph54u" path="res://assets/shaders/gradient/Gradient.tres" id="1_mylod"]
-[ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://assets/shaders/noise/noise.gdshader" id="2_yd4us"]
-[ext_resource type="Shader" uid="uid://dvf542nmsehxa" path="res://assets/shaders/film_grain.gdshader" id="3_3ho6b"]
+[ext_resource type="PackedScene" uid="uid://w2iaiertg4jn" path="res://scenes/tests/test_environment/column.tscn" id="2_fbxw4"]
+[ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://assets/Meshes/Env/wall.glb" id="3_qqyeg"]
+[ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="4_4s4ee"]
+[ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://assets/shaders/noise/noise.gdshader" id="4_jrke8"]
 
 [sub_resource type="Environment" id="Environment_77qcy"]
 background_mode = 1
@@ -15,15 +16,6 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_albedo = Color(0.72992647, 0.8090403, 0.9852132, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76q71"]
-albedo_color = Color(0.067032225, 0.24775872, 0.45632547, 1)
-emission_enabled = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
-size = Vector2(100, 100)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_77qcy"]
-
 [sub_resource type="QuadMesh" id="QuadMesh_77qcy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77qcy"]
@@ -35,7 +27,7 @@ shading_mode = 0
 gradient = SubResource("Gradient_oqwq7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j6s73"]
-shader = ExtResource("2_yd4us")
+shader = ExtResource("4_jrke8")
 shader_parameter/noise_scale = 1.0
 shader_parameter/movement_dir = Vector3(0, 0, 0)
 shader_parameter/density_mult = 0.5
@@ -58,27 +50,68 @@ gravity = Vector3(0, 0, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_vub1y"]
 
+[sub_resource type="Shader" id="Shader_b25kf"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear;
+uniform float grain_strength = 0.05;
+
+float random(vec2 uv) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void fragment() {
+    vec3 color = texture(screen_texture, SCREEN_UV).rgb;
+    float noise = random(SCREEN_UV + fract(TIME)) - 0.5;
+    COLOR = vec4(color + noise * grain_strength, 1.0);
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77qcy"]
-shader = ExtResource("3_3ho6b")
+shader = SubResource("Shader_b25kf")
 shader_parameter/grain_strength = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76q71"]
+albedo_color = Color(0.067032225, 0.24775872, 0.45632547, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_u25ut"]
 
 [node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2087690493]
 environment = SubResource("Environment_77qcy")
 
-[node name="floor" type="MeshInstance3D" parent="." unique_id=1049706817]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
-material_override = SubResource("StandardMaterial3D_76q71")
-mesh = SubResource("PlaneMesh_vub1y")
-
-[node name="character" type="MeshInstance3D" parent="." unique_id=291548300]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888149, 1.048752, 0)
-visible = false
-material_override = ExtResource("1_mylod")
-mesh = SubResource("CapsuleMesh_77qcy")
+[node name="Player" parent="." unique_id=792214008 instance=ExtResource("4_4s4ee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.632431, 0)
 
 [node name="Columns" type="Node3D" parent="." unique_id=1428298359]
+
+[node name="colon6" parent="Columns" unique_id=195045148 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(-3.2857976, -0.5827364, -0.5241165, -0.1389692, -8.230707, 1.887832, -0.54139584, 5.649413, 2.6963458, -14.507324, 15.1939535, -13.970482)
+
+[node name="colon5" parent="Columns" unique_id=950041170 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(2.9468617, 0.6180793, -0.5230286, 0, 8.373758, 1.0995036, 0.5621439, -3.2400851, 2.741812, 6.3947525, 2.4821062, -1.6853008)
+
+[node name="colon4" parent="Columns" unique_id=1230088347 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(3.0382524, -1.1999303, -1.3107096, -0.55240977, 7.6806803, -2.0616212, 1.2540944, 6.290255, 2.2672992, -9.473108, 5.1444383, 7.8019066)
+
+[node name="colon3" parent="Columns" unique_id=457521226 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(-1.9528903, -0.6750363, -0.36824656, 0.2938705, -5.8303604, -0.37133324, -0.31600505, -1.2502934, 1.930416, -6.6582026, 22.439075, -1.818682)
+
+[node name="colon2" parent="Columns" unique_id=294527797 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(4.95134, -0.6958646, 0.60263723, -3.7855173e-07, 8.660254, 2.5, 0.6958653, 4.95134, -4.2879863, 7.1967, 3.0258794, 12.0142565)
+
+[node name="colon" parent="Columns" unique_id=397150939 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(1.5263609, 0, 1.7657235, 0, 6.9999995, 0, -1.7657235, 0, 1.5263609, -4.7194653, 8.136485, 8.160358)
+
+[node name="colon7" parent="Columns" unique_id=1894329393 instance=ExtResource("2_fbxw4")]
+transform = Transform3D(2.9464545, -0.4381351, -0.54504746, 0, 8.693333, -0.7764571, 0.5642747, 2.2877955, 2.8460565, -0.65914065, -4.638837, -13.146776)
+
+[node name="wall" parent="." unique_id=1428330647 instance=ExtResource("3_qqyeg")]
+transform = Transform3D(-6.119594e-07, 0, 14, 0, 14, 0, -14, 0, -6.119594e-07, -19.48525, 8.241871, 0.9638928)
 
 [node name="Cameras" type="Node3D" parent="." unique_id=2062688741]
 
@@ -137,3 +170,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2146260569]
+
+[node name="floor" type="MeshInstance3D" parent="Floor" unique_id=1049706817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
+material_override = SubResource("StandardMaterial3D_76q71")
+mesh = SubResource("PlaneMesh_vub1y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1114421440]
+shape = SubResource("WorldBoundaryShape3D_u25ut")
