@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://kwrbu2vc8hg8"]
+
+[ext_resource type="Material" uid="uid://bjbckpc5ph54u" path="res://assets/shaders/gradient/Gradient.tres" id="1_mylod"]
+[ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://assets/shaders/noise/noise.gdshader" id="2_yd4us"]
+[ext_resource type="Shader" uid="uid://dvf542nmsehxa" path="res://assets/shaders/film_grain.gdshader" id="3_3ho6b"]
+
+[sub_resource type="Environment" id="Environment_77qcy"]
+background_mode = 1
+background_color = Color(0, 0.036400244, 0.10249903, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.009031518, 0.044031605, 0.14486754, 1)
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.72992647, 0.8090403, 0.9852132, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76q71"]
+albedo_color = Color(0.067032225, 0.24775872, 0.45632547, 1)
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vub1y"]
+size = Vector2(100, 100)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_77qcy"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_77qcy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77qcy"]
+shading_mode = 0
+
+[sub_resource type="Gradient" id="Gradient_oqwq7"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_77qcy"]
+gradient = SubResource("Gradient_oqwq7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6s73"]
+shader = ExtResource("2_yd4us")
+shader_parameter/noise_scale = 1.0
+shader_parameter/movement_dir = Vector3(0, 0, 0)
+shader_parameter/density_mult = 0.5
+shader_parameter/albedoColor = Color(0, 0, 0, 1)
+shader_parameter/emissionColor = Color(0, 0, 0, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_77qcy")
+shader_parameter/fade_out_height = 2.0
+shader_parameter/fade_out_distance = 1.5
+shader_parameter/fade_out_horiz = 2.0
+shader_parameter/colorRand = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_77qcy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_77qcy"]
+emission_shape = 3
+emission_box_extents = Vector3(400, 150, 500)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vub1y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77qcy"]
+shader = ExtResource("3_3ho6b")
+shader_parameter/grain_strength = 0.05
+
+[node name="EnviromentCaligari" type="Node3D" unique_id=1405314670]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2087690493]
+environment = SubResource("Environment_77qcy")
+
+[node name="floor" type="MeshInstance3D" parent="." unique_id=1049706817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006308317, -9.536743e-07, -0.0033996105)
+material_override = SubResource("StandardMaterial3D_76q71")
+mesh = SubResource("PlaneMesh_vub1y")
+
+[node name="character" type="MeshInstance3D" parent="." unique_id=291548300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08888149, 1.048752, 0)
+visible = false
+material_override = ExtResource("1_mylod")
+mesh = SubResource("CapsuleMesh_77qcy")
+
+[node name="Columns" type="Node3D" parent="." unique_id=1428298359]
+
+[node name="Cameras" type="Node3D" parent="." unique_id=2062688741]
+
+[node name="Camera3D" type="Camera3D" parent="Cameras" unique_id=835150337]
+transform = Transform3D(0.10799935, 0.25730523, 0.96027607, 0, 0.9659258, -0.25881907, -0.994151, 0.027952291, 0.10431936, 5.550659, 1.0797577, 4.082798)
+
+[node name="Camera3D2" type="Camera3D" parent="Cameras" unique_id=1338910827]
+transform = Transform3D(0.025629105, -0.467303, 0.88372564, -0.017381221, 0.8836742, 0.46777987, -0.9995204, -0.027349014, 0.01452548, 17.850035, 20.776693, 5.70401)
+
+[node name="TestWhiteBackdrop" type="MeshInstance3D" parent="." unique_id=1023041451]
+transform = Transform3D(-4.371139e-05, 0, 1000, 0, 1000, 0, -1000, 0, -4.371139e-05, -363.10504, 264.02307, -65.12848)
+mesh = SubResource("QuadMesh_77qcy")
+surface_material_override/0 = SubResource("StandardMaterial3D_77qcy")
+
+[node name="Lights" type="Node3D" parent="." unique_id=1412428186]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=671542373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+light_color = Color(0.4654631, 0.7107699, 0.99999887, 1)
+light_volumetric_fog_energy = 10.822
+omni_range = 49.333
+omni_attenuation = 0.902
+omni_shadow_mode = 0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=2140834640]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -71, 54, 6.556708e-07)
+light_color = Color(0.9098078, 0.99999994, 0.9989149, 1)
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = 6.228
+shadow_opacity = 0.85
+shadow_blur = 0.89
+spot_range = 933.482
+spot_attenuation = -0.08
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=1289444756]
+transform = Transform3D(40, 0, 0, 0, 63.592, 0, 0, 0, 63.592, 0, 0, 0)
+material = SubResource("ShaderMaterial_j6s73")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1785191129]
+transform = Transform3D(80, 0, 0, 0, 1, 0, 0, 0, 100, 21.71373, 30.990051, 0.020767212)
+mesh = SubResource("BoxMesh_77qcy")
+surface_material_override/0 = SubResource("StandardMaterial3D_vub1y")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2072044290]
+process_material = SubResource("ParticleProcessMaterial_77qcy")
+draw_pass_1 = SubResource("QuadMesh_vub1y")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=234362210]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=511082553]
+material = SubResource("ShaderMaterial_77qcy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
