@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jvufi8crgcib"]
 
 [ext_resource type="PackedScene" uid="uid://w2iaiertg4jn" path="res://scenes/tests/test_environment/column.tscn" id="2_fbxw4"]
-[ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://assets/Meshes/Env/wall.glb" id="3_qqyeg"]
+[ext_resource type="PackedScene" uid="uid://ucbd3cihbdrx" path="res://assets/meshes/Env/wall.glb" id="3_qqyeg"]
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="4_4s4ee"]
 [ext_resource type="Shader" uid="uid://nlyqau76y15u" path="res://assets/shaders/noise/noise.gdshader" id="4_jrke8"]
 
