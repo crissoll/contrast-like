@@ -51,7 +51,7 @@ collision_mask = 9
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1952382560]
 collision_layer = 11
-collision_mask = 4
+collision_mask = 20
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=600511667]
 mesh = SubResource("BoxMesh_gepqh")
@@ -60,7 +60,7 @@ mesh = SubResource("BoxMesh_gepqh")
 shape = SubResource("BoxShape3D_au7uu")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=184581214]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1312685, 12.986093)
+transform = Transform3D(0.8412644, 0.14592268, -0.5205582, -0.1469999, 0.98834795, 0.039489526, 0.520255, 0.043300863, 0.85291255, -4.6585903, 3.1312685, 6.093194)
 light_energy = 19.845
 light_size = 0.362
 shadow_enabled = true
@@ -171,44 +171,62 @@ target_shape = NodePath("../../Floor/CollisionShape3D")
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="BoxShadow" unique_id=1687961853]
 
 [node name="CollidableShadow" type="StaticBody3D" parent="." unique_id=1889754967]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow" unique_id=1754292906]
 
 [node name="CollidableShadow2" type="StaticBody3D" parent="." unique_id=1304918830]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow2" unique_id=916358485]
 
 [node name="CollidableShadow3" type="StaticBody3D" parent="." unique_id=1304409021]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow3" unique_id=771752136]
 
 [node name="CollidableShadow4" type="StaticBody3D" parent="." unique_id=673126702]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow4" unique_id=1561385270]
 
 [node name="CollidableShadow5" type="StaticBody3D" parent="." unique_id=119534848]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow5" unique_id=1814702516]
 
 [node name="CollidableShadow6" type="StaticBody3D" parent="." unique_id=83438330]
-collision_mask = 5
+collision_layer = 32
+collision_mask = 17
 
 [node name="ShadowCollisionShape" type="CollisionShape3D" parent="CollidableShadow6" unique_id=1992452964]
 
 [node name="Wall" type="StaticBody3D" parent="." unique_id=1493682869]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -6.1990848)
-collision_layer = 9
+collision_layer = 11
 collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall" unique_id=1344906052]
 shape = SubResource("BoxShape3D_fe35m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall" unique_id=1673610944]
+mesh = SubResource("BoxMesh_sg0in")
+
+[node name="Wall2" type="StaticBody3D" parent="." unique_id=604039899]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.908125, 7, -6.1990848)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2" unique_id=1151587960]
+shape = SubResource("BoxShape3D_fe35m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2" unique_id=340622384]
 mesh = SubResource("BoxMesh_sg0in")
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=1126659322]

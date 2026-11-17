@@ -90,7 +90,9 @@ shadow_form={
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Camera"
 3d_physics/layer_3="player"
-3d_physics/layer_4="shadow_receiver"
+3d_physics/layer_4="walls_shadow_receiver"
+3d_physics/layer_5="shadow_player"
+3d_physics/layer_6="collidable_shadows"
 
 [physics]
 

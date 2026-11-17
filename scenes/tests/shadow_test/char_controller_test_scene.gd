@@ -54,6 +54,7 @@ func _enter_shadow_form() -> void:
 		return
 
 	is_shadow = true
+	player.set_collision_mask_value(6,true)
 	last_player_pos = player.global_position
 	_wall_normal = wall.normal
 	var target: Vector3 = wall.position + _wall_normal * wall_offset
@@ -70,6 +71,7 @@ func _enter_shadow_form() -> void:
 
 func _exit_shadow_form() -> void:
 	is_shadow = false
+	player.set_collision_mask_value(6,false)
 	_set_player_control(false)
 
 	_tween = _new_tween()
