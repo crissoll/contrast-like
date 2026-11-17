@@ -40,4 +40,12 @@ mesh = SubResource("BoxMesh_au7uu")
 
 [node name="CameraRotationTarget" type="Node3D" parent="." unique_id=993911557]
 
-[node name="StateMachine" parent="." unique_id=1389398072 instance=ExtResource("3_t0fl0")]
+[node name="StateMachine" parent="." unique_id=1389398072 node_paths=PackedStringArray("states") instance=ExtResource("3_t0fl0")]
+states = {
+0: null,
+1: NodePath("IdleState"),
+2: NodePath("MoveState"),
+3: NodePath("JumpState"),
+4: NodePath("FallState"),
+5: NodePath("DoubleJumpState")
+}
