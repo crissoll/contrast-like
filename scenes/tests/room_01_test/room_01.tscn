@@ -1,3 +1,23 @@
 [gd_scene format=3 uid="uid://d4ld5wf4vkq2s"]
 
-[node name="Room01" type="Node2D" unique_id=1985173790]
+[node name="room_01" type="Node3D" unique_id=1010355922]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=350227890]
+
+[node name="shell" type="CSGCombiner3D" parent="." unique_id=1635066117]
+
+[node name="floor" type="CSGBox3D" parent="shell" unique_id=486004357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(14, 0.2, 14)
+
+[node name="wall_back" type="CSGBox3D" parent="shell" unique_id=1995027752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -7)
+size = Vector3(14, 5, 0.3)
+
+[node name="wall_left" type="CSGBox3D" parent="shell" unique_id=2092194333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 0)
+size = Vector3(0.3, 5, 14)
+
+[node name="wall_right" type="CSGBox3D" parent="shell" unique_id=1494822108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.5, 0)
+size = Vector3(0.3, 5, 14)
