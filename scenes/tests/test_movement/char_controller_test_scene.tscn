@@ -37,10 +37,19 @@ size = Vector3(63, 15, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_sg0in"]
 size = Vector3(63, 15, 1)
 
-[node name="CharacterControllerTestScene" type="Node3D" unique_id=2059027252 node_paths=PackedStringArray("initial_pos")]
+[node name="CharacterControllerTestScene" type="Node3D" unique_id=2059027252 node_paths=PackedStringArray("initial_pos", "light")]
 script = ExtResource("1_ugoul")
 initial_pos = NodePath("Marker3D")
 wall_mask = 1
+light = NodePath("SpotLight3D")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=184581214]
+transform = Transform3D(0.8412644, 0.14592268, -0.5205582, -0.1469999, 0.98834795, 0.039489526, 0.520255, 0.043300863, 0.85291255, -2.7606149, 3.1312685, 7.2072067)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 25.285
+spot_angle = 37.8
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=809632510]
 environment = SubResource("Environment_5dnud")
@@ -58,14 +67,6 @@ mesh = SubResource("BoxMesh_gepqh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1132417981]
 shape = SubResource("BoxShape3D_au7uu")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=184581214]
-transform = Transform3D(0.8412644, 0.14592268, -0.5205582, -0.1469999, 0.98834795, 0.039489526, 0.520255, 0.043300863, 0.85291255, -4.6585903, 3.1312685, 6.093194)
-light_energy = 19.845
-light_size = 0.362
-shadow_enabled = true
-spot_range = 142.901
-spot_angle = 40.45734
 
 [node name="CastingCollidableShadow" type="StaticBody3D" parent="." unique_id=766248539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5317631, -0.024746656)

@@ -2,7 +2,7 @@ extends Node3D
 
 @export var initial_pos: Marker3D
 
-@export_group("Transizione")
+@export_group("Transition")
 @export var transition_time := 0.6
 @export var trans_type: Tween.TransitionType = Tween.TRANS_SINE
 @export var ease_type: Tween.EaseType = Tween.EASE_IN_OUT
@@ -11,7 +11,9 @@ extends Node3D
 @export_flags_3d_physics var wall_mask: int = 4
 @export var wall_offset := 0.5
 @export var wall_check_distance := 2.0
+@export var corner_margin := 0.1
 
+@export var light : SpotLight3D
 
 var player: Player
 var is_shadow := false
@@ -44,6 +46,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	if is_shadow and not (_tween and _tween.is_running()):
 		_stick_to_wall()
+		
+	if player.global_position.length() >= light.global_position.length() + light.spot_range :
+		if is_shadow:
+			_exit_shadow_form()
 
 
 #region Transition
@@ -90,8 +96,9 @@ func _new_tween() -> Tween:
 
 #region Wall
 
-##sticks player to wall using the normal
+## sticks player to wall using the normal
 func _stick_to_wall() -> void:
+	_check_inner_corner()
 	var wall := _find_wall(player.global_position, -_wall_normal)
 
 	if wall.is_empty():
@@ -105,11 +112,25 @@ func _stick_to_wall() -> void:
 	player.global_position = pos
 	player.velocity -= _wall_normal * player.velocity.dot(_wall_normal)
 	_last_valid_pos = pos
+	
+func _check_inner_corner() -> void:
+	var input_x := Input.get_axis("move_left", "move_right")
+	if is_zero_approx(input_x):
+		return
 
-## finds the wall next to the marker
-func _find_wall(from: Vector3, dir: Vector3) -> Dictionary:
-	var query := PhysicsRayQueryParameters3D.create(from, from + dir.normalized() * wall_check_distance, wall_mask)
+	var wall_right := Vector3.UP.cross(_wall_normal)
+	var dir := wall_right * signf(input_x)
+
+	var hit := _find_wall(player.global_position, dir, wall_offset + corner_margin)
+	if not hit.is_empty():
+		_wall_normal = hit.normal
+		
+## finds the wall where the player will be sticked to
+func _find_wall(from: Vector3, dir: Vector3, length := wall_check_distance) -> Dictionary:
+	var query := PhysicsRayQueryParameters3D.create(
+		from, from + dir.normalized() * length, wall_mask)
 	return get_world_3d().direct_space_state.intersect_ray(query)
+	
 #endregion
 
 ## player mesh is not visibile, but his shadows are casted
@@ -121,7 +142,7 @@ func _set_shadows_only(shadows_only: bool) -> void:
 				else GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 			)
 
-## block player during transition
+## blocks player during transition
 func _set_player_control(enabled: bool) -> void:
 	player.velocity = Vector3.ZERO
 	player.set_physics_process(enabled)

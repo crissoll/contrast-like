@@ -7,6 +7,7 @@ extends CharacterBody3D
 #@export var camera_target: Node3D
 @export var visuals: Node3D
 @export var animation_tree: AnimationTree
+@export var collision_shape : CollisionShape3D
 #endregion 
 
 

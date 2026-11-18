@@ -12,11 +12,12 @@
 [sub_resource type="BoxMesh" id="BoxMesh_au7uu"]
 size = Vector3(0.03314209, 0.24316406, 0.75161743)
 
-[node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "visuals")]
+[node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "visuals", "collision_shape")]
 collision_layer = 4
 script = ExtResource("1_wph10")
 camera_rig = NodePath("CompCameraHandler")
 visuals = NodePath("Visuals")
+collision_shape = NodePath("CollisionShape3D")
 walk_speed = 4.5
 overall_gravity_scale = 1.4
 strength_double_jump = 0.9
