@@ -16,7 +16,6 @@ extends Node
 
 @export var light : SpotLight3D
 
-
 var is_shadow := false
 var last_player_pos: Vector3
 var _tween: Tween
