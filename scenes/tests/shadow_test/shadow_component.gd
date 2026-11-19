@@ -1,4 +1,5 @@
-extends Node3D
+class_name CompShadow
+extends Node
 
 @export var initial_pos: Marker3D
 
@@ -8,14 +9,14 @@ extends Node3D
 @export var ease_type: Tween.EaseType = Tween.EASE_IN_OUT
 
 @export_group("Wall")
-@export_flags_3d_physics var wall_mask: int = 4
+@export_flags_3d_physics var wall_mask: int = Utils.CollisionLayers.WALLS
 @export var wall_offset := 0.5
 @export var wall_check_distance := 2.0
 @export var corner_margin := 0.1
 
 @export var light : SpotLight3D
 
-var player: Player
+
 var is_shadow := false
 var last_player_pos: Vector3
 var _tween: Tween
@@ -24,9 +25,9 @@ var _wall_normal := Vector3.ZERO
 var _last_valid_pos: Vector3
 var _shadow_height := 0.0
 
+@onready var player : Player = get_parent()
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
 	last_player_pos = player.global_position
 	process_physics_priority = player.process_physics_priority + 1
 
@@ -129,7 +130,7 @@ func _check_inner_corner() -> void:
 func _find_wall(from: Vector3, dir: Vector3, length := wall_check_distance) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(
 		from, from + dir.normalized() * length, wall_mask)
-	return get_world_3d().direct_space_state.intersect_ray(query)
+	return player.get_world_3d().direct_space_state.intersect_ray(query)
 	
 #endregion
 

@@ -10,15 +10,16 @@ var shadow_collision: CollisionShape3D = (func():
 	get_parent().add_sibling.call_deferred(shadow_body)
 	return _shadow_collision
 	).call()
+var unique_vertices: PackedVector3Array
+var _projected_shadow_shape := ConvexPolygonShape3D.new()
+var _shadow_static_body: Node3D
+
 @export var light: Light3D
-@export_flags_3d_physics var target_mask: int = 8  # floor/walls which receive the shadow
+@export_flags_3d_physics var target_mask: int = Utils.CollisionLayers.WALLS_SHADOW_RECEIVER
 @export var extrusion_direction := Vector3.ZERO
 @export_range(0.02, 1.0) var update_time := 0.08
 @export var max_ray_length := 1000.0
 
-var _vertices: PackedVector3Array
-var _projected_shadow_shape := ConvexPolygonShape3D.new()
-var _shadow_static_body: Node3D
 
 var _prev_transform: Transform3D
 
@@ -28,7 +29,7 @@ var _time_left := 0.0
 
 func _ready() -> void:
 	_init_shadow_collider()
-	_vertices = _unique_vertices()
+	unique_vertices = _unique_vertices()
 	_prev_transform = global_transform
 
 ## assigns the convex polygon shape to the shadow collision shape and assigns the area3d of the shadow to _shadow_area
@@ -70,7 +71,7 @@ func _update_shadow_collider() -> void:
 ## - from index 0 to n-1 the vertices of the projected shadow [br]
 ## - from n to 2n-1 the vertices of the original mesh IF THE EXTRUSION VECTOR DIRECTION IS ZERO, [br]otherwise it returns the projected vertices shifted by the vector direction, obtaining a slab.
 func _compute_shadow_points() -> PackedVector3Array:
-	var n := _vertices.size()
+	var n := unique_vertices.size()
 	var projected_points := PackedVector3Array()
 	projected_points.resize(n * 2)
 
@@ -78,7 +79,7 @@ func _compute_shadow_points() -> PackedVector3Array:
 	var dir := -light.global_transform.basis.z   # directional light
 
 	for i in n:
-		var p := global_transform * _vertices[i]   #converts vertices of the object from local to global
+		var p := global_transform * unique_vertices[i]   #converts vertices of the object from local to global
 
 		if not (light is DirectionalLight3D):
 			dir = (p - light.global_position).normalized()  # divergent rays
@@ -98,7 +99,10 @@ func _intersection_point(space: PhysicsDirectSpaceState3D, from: Vector3, dir: V
 	return hit.position - global_position  # local coordinates of the object
 
 ## Extrusion points give that flat outline some thickness. Intersection points alone would make a flat, zero-height shape, which can’t really contain a player. So each intersection point gets a partner point, and what that partner is depends on extrusion_direction
-func _extrusion_point(vertex_world: Vector3, shadow_point_rel: Vector3) -> Vector3:
+func _extrusion_point(
+		vertex_world: Vector3,
+		shadow_point_rel: Vector3
+	) -> Vector3:
 	if extrusion_direction == Vector3.ZERO:
 		return vertex_world - global_position  
 	return shadow_point_rel + extrusion_direction
