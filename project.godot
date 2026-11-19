@@ -14,6 +14,10 @@ config/name="ContrastLike"
 run/main_scene="uid://86kgiawf3qcs"
 config/features=PackedStringArray("4.7", "Forward Plus")
 
+[autoload]
+
+Utils="*uid://bj66ihdvq6khp"
+
 [display]
 
 window/stretch/mode="canvas_items"

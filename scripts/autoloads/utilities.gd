@@ -1,0 +1,10 @@
+extends Node
+
+enum CollisionLayers{
+	WALLS = 1,
+	CAMERA = 2,
+	PLAYER = 4,
+	WALLS_SHADOW_RECEIVER = 8,
+	SHADOW_PLAYER = 16,
+	COLLIDABLE_SHADOW = 32,
+}
