@@ -44,13 +44,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if is_shadow and not (_tween and _tween.is_running()):
-		_stick_to_wall()
-		
-	if player.global_position.length() >= light.global_position.length() + light.spot_range :
-		if is_shadow:
-			_exit_shadow_form()
+	if _tween and _tween.is_running():
+		return
 
+	if is_shadow:
+		_stick_to_wall()
+		if not _is_inside_light_cone():
+			_exit_shadow_form()
 
 #region Transition
 func _enter_shadow_form() -> void:
@@ -81,7 +81,7 @@ func _exit_shadow_form() -> void:
 	_set_player_control(false)
 
 	_tween = _new_tween()
-	_tween.tween_property(player, "global_position", last_player_pos, transition_time)
+	_tween.tween_property(player, "global_position", player.global_position, transition_time)
 	_tween.tween_callback(_set_shadows_only.bind(false))
 	_tween.tween_callback(_set_player_control.bind(true))
 
@@ -146,3 +146,16 @@ func _set_shadows_only(shadows_only: bool) -> void:
 func _set_player_control(enabled: bool) -> void:
 	player.velocity = Vector3.ZERO
 	player.set_physics_process(enabled)
+	
+func _is_inside_light_cone() -> bool:
+	var hypotenuse : Vector3 = (player.global_position - light.global_position)
+	return is_inside_angle(hypotenuse) and is_inside_range(hypotenuse)
+
+
+func is_inside_angle(hypotenuse : Vector3) -> bool:
+	var angle : float = hypotenuse.angle_to(-light.global_basis.z)
+	angle = rad_to_deg(angle)
+	return angle <= light.spot_angle
+
+func is_inside_range(hypotenuse : Vector3) -> bool:
+	return hypotenuse.length() <= light.spot_range

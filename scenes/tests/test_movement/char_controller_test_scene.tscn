@@ -48,8 +48,8 @@ transform = Transform3D(0.8412644, 0.14592268, -0.5205582, -0.1469999, 0.9883479
 light_energy = 16.0
 light_size = 0.165
 shadow_enabled = true
-spot_range = 25.285
-spot_angle = 37.8
+spot_range = 28.0
+spot_angle = 47.9
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=809632510]
 environment = SubResource("Environment_5dnud")
