@@ -89,3 +89,5 @@ camera_align={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/volumetric_fog/volume_depth=128
+environment/volumetric_fog/use_filter=0

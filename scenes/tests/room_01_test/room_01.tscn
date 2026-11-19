@@ -4,21 +4,28 @@
 
 [sub_resource type="Environment" id="Environment_xrv2b"]
 background_mode = 1
-background_color = Color(0.13715622, 0.15999487, 0.25109702, 1)
+background_color = Color(0.2654022, 0.2788504, 0.33325917, 1)
 background_energy_multiplier = 2.15
 ambient_light_source = 2
 ambient_light_color = Color(0.14555252, 0.16349518, 0.26052514, 1)
 ambient_light_energy = 3.31
 ssao_radius = 2.48
+glow_enabled = true
+glow_intensity = 0.79
+glow_hdr_threshold = 2.22
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
+volumetric_fog_density = 0.0252
 volumetric_fog_albedo = Color(0.22745098, 0.2509804, 0.3764706, 1)
+volumetric_fog_emission = Color(0.027409147, 0.027409151, 0.027409151, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77qcy"]
+roughness = 0.16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
-emission = Color(0.17875856, 3.272891e-06, 0.7965705, 1)
-emission_energy_multiplier = 3.66
+emission = Color(0.6825102, 0.75545603, 0.9399663, 1)
+emission_energy_multiplier = 10.63
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_77qcy"]
 material = SubResource("StandardMaterial3D_vub1y")
@@ -29,11 +36,12 @@ material = SubResource("StandardMaterial3D_vub1y")
 environment = SubResource("Environment_xrv2b")
 
 [node name="shell" type="CSGCombiner3D" parent="." unique_id=1635066117]
-transform = Transform3D(2.5300002, 0, 0, 0, 3.5512767, 0, 0, 0, 2.2541752, 0, 0, 0)
+transform = Transform3D(3.5502698, 0, 0, 0, 3.5512767, 0, 0, 0, 2.2541752, 0, 0, 0)
 
 [node name="floor" type="CSGBox3D" parent="shell" unique_id=486004357]
 transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, -0.0027387156, -0.46902445, 0.28390136)
 size = Vector3(14, 0.2, 14)
+material = SubResource("StandardMaterial3D_77qcy")
 
 [node name="ceiling" type="CSGBox3D" parent="shell" unique_id=16302911]
 transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380631, 0.12728001, 5.4400682, 0.09166309)
@@ -52,22 +60,74 @@ transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, 8.0099
 size = Vector3(0.3, 5, 14)
 
 [node name="window_cut_1" type="CSGBox3D" parent="shell" unique_id=1600683612]
-transform = Transform3D(1, 0, 0, 0, 2.2726827, 0, 0, 0, 2.0351584, -0.46164587, 2.0003395, -9.201352)
+transform = Transform3D(1.0000004, 0, 0, 0, 2.3565893, 0, 0, 0, 2.0351589, 2.7641861, 3.388118, -9.201352)
 operation = 2
-size = Vector3(1.2302246, 1.1463623, 1.590332)
+size = Vector3(1.4491577, 1.1463623, 1.590332)
+
+[node name="window_cut_2" type="CSGBox3D" parent="shell" unique_id=1165451055]
+transform = Transform3D(1.0000004, 0, 0, 0, 2.3565896, 0, 0, 0, 2.0351589, 0.47718766, 3.3881183, -9.201352)
+operation = 2
+size = Vector3(1.4491577, 1.1463623, 1.590332)
+
+[node name="window_cut_3" type="CSGBox3D" parent="shell" unique_id=1763177271]
+transform = Transform3D(1.0000004, 0, 0, 0, 3.1908896, 0, 0, 0, 2.0351589, -2.7305756, 2.9304097, -9.201352)
+operation = 2
+size = Vector3(3.6387634, 1.1463623, 1.590332)
+
+[node name="window_cut_4" type="CSGBox3D" parent="shell" unique_id=941616614]
+transform = Transform3D(-0.017870296, 0, 2.074591, 0, 2.2526937, 0, -3.2151797, 0, -0.011530846, -8.606452, 3.3317902, -2.513526)
+operation = 2
+size = Vector3(2.547409, 0.4257202, 1.0808105)
+
+[node name="window_cut_5" type="CSGBox3D" parent="shell" unique_id=878532749]
+transform = Transform3D(-0.017870296, 0, 2.074591, 0, 2.25272, 0, -3.215202, 0, -0.011530934, 7.295559, 3.185071, -2.513527)
+operation = 2
+size = Vector3(2.547409, 0.8755951, 1.0808105)
+
+[node name="window_union_1" type="CSGBox3D" parent="shell" unique_id=697285836]
+transform = Transform3D(0.60813993, 0, 0, 0, 0.2575994, 0, 0, 0, -0.41776153, -3.1265247, 2.852466, -7.3976026)
+size = Vector3(7.736328, 1, 3.4750977)
+
+[node name="window_union_2" type="CSGBox3D" parent="shell" unique_id=2017323401]
+transform = Transform3D(2.6582645e-08, 0.25759947, 0, -0.6081401, 1.1260031e-08, 0, 0, 0, -0.41776156, -3.6602058, 2.8524668, -7.3976026)
+size = Vector3(7.736328, 1, 3.4750977)
+
+[node name="window_union_3" type="CSGBox3D" parent="shell" unique_id=714771497]
+transform = Transform3D(2.6582647e-08, 0.25759947, 0, -0.6081402, 1.1260033e-08, 0, 0, 0, -0.4177616, -2.18397, 2.8524673, -7.3976026)
+size = Vector3(7.736328, 1, 3.4750977)
 
 [node name="lights" type="Node3D" parent="." unique_id=95926576]
 
+[node name="emission_panel_1" type="MeshInstance3D" parent="lights" unique_id=1441038526]
+transform = Transform3D(32.719944, -7.589838e-08, 4.4320216e-14, 0, 3.794919e-08, 11.597989, 2.8604684e-06, 0.8681762, -5.069642e-07, -0.0009765625, 8.381409, -20.922867)
+mesh = SubResource("PlaneMesh_77qcy")
+
+[node name="emission_panel_2" type="MeshInstance3D" parent="lights" unique_id=996400948]
+transform = Transform3D(9.540136e-07, -0.8681762, 4.1057714e-07, 0, 3.794919e-08, 9.39291, 21.825287, 3.794919e-08, -1.7946895e-14, 29.84882, 8.870422, -4.48407)
+mesh = SubResource("PlaneMesh_77qcy")
+
+[node name="emission_panel_3" type="MeshInstance3D" parent="lights" unique_id=1610923756]
+transform = Transform3D(1.3592172e-06, -0.87643135, -3.7393977e-07, 1.1882655e-13, -3.831003e-08, 8.554745, 31.095266, 3.831003e-08, -1.6345429e-14, -29.805737, 10.93222, -12.028992)
+mesh = SubResource("PlaneMesh_77qcy")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="lights" unique_id=698598271]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0069289505, 2.0504417, 0.34068167)
+visible = false
 light_color = Color(0.47511578, 0.43485978, 1, 1)
 light_energy = 6.465
 omni_range = 49.129
 omni_attenuation = 0.901
 
+[node name="searchlight" type="SpotLight3D" parent="lights" unique_id=279815472]
+transform = Transform3D(-0.19367975, -0.6597247, 0.7261208, -0.4623349, 0.7141733, 0.5255501, -0.8652945, -0.2339226, -0.44333464, 27.158989, 15.208811, -15.8957405)
+light_color = Color(0.5855088, 0.6506452, 1, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+spot_range = 102.969
+spot_attenuation = 0.4
+spot_angle = 15.59
+spot_angle_attenuation = 1.4142141
+
 [node name="Player" parent="." unique_id=792214008 instance=ExtResource("1_cvvee")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5.7634373)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1441038526]
-transform = Transform3D(40.47513, 0, 0, 0, 0.00707051, 19.93936, 0, 1.0483549, -0.13447873, 0, 14.10376, -27.12262)
-mesh = SubResource("PlaneMesh_77qcy")
