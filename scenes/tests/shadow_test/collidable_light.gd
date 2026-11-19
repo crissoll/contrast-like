@@ -5,6 +5,10 @@ extends Node3D
 @export var shadow_container : Node3D
 @export var max_ray_length := 1000.0
 
+
+
+var transform_change_tracker: TransformChangeTracker
+
 static var meshes_surfaces : Dictionary[Mesh,PackedVector3Array]
 var shadows_infos : Dictionary[MeshInstance3D,MeshShadowInfo]
 
@@ -21,11 +25,6 @@ func add_mesh_surface(mesh:Mesh):
 func compute_mesh_shadow_info(mesh:MeshInstance3D) -> void:
 	if mesh not in shadows_infos:
 		add_shadow_info(mesh)
-	print("mesh:",mesh.get_path(),#correct
-		"\ntransform:",mesh.global_transform, #correct
-		"\nlight_direction:",-global_transform.basis.z)#correct
-	for p in meshes_surfaces[mesh.mesh]:#correct
-		print(mesh.to_global(p))
 	shadows_infos[mesh].update_shadow(
 		mesh.global_transform,
 		meshes_surfaces[mesh.mesh],
@@ -39,14 +38,22 @@ func add_shadow_info(mesh:MeshInstance3D) -> void:
 	shadow_container.add_child(mesh_shadow_info.shadow_body)
 	shadows_infos[mesh] = mesh_shadow_info
 
-@export
-var transform_change_tracker: TransformChangeTracker
-
 func _ready() -> void:
+	var transform_notifier := TransformNotifier.new()
+	transform_notifier.transform_changed.connect(_on_transform_notifier_transform_changed)
+	add_child(transform_notifier)
+	transform_change_tracker = TransformChangeTracker.new()
+	add_child(transform_change_tracker)
 	transform_change_tracker.node_transform_changed.connect(compute_mesh_shadow_info)
 	var meshes : Array[MeshInstance3D]
 	meshes.assign(level_container.find_children("*","MeshInstance3D",true))
 	for mesh in meshes:
+		if mesh.cast_shadow == GeometryInstance3D.ShadowCastingSetting.SHADOW_CASTING_SETTING_OFF:
+			continue
 		add_mesh_surface(mesh.mesh)
 		transform_change_tracker.add_tracking(mesh)
+		compute_mesh_shadow_info(mesh)
+
+func _on_transform_notifier_transform_changed(_target:Node3D) -> void:
+	for mesh in shadows_infos:
 		compute_mesh_shadow_info(mesh)

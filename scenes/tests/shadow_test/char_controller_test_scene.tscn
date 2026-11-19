@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bdtwpreb0uelo" path="res://scenes/tests/shadow_test/shadow_component.gd" id="2_18wcm"]
 [ext_resource type="Script" uid="uid://dp0xb64y30sjm" path="res://scenes/tests/shadow_test/collidable_shadow.gd" id="3_ppd20"]
 [ext_resource type="Script" uid="uid://cr0tufumawbev" path="res://scenes/tests/shadow_test/shadow_trigger_event.gd" id="4_7m8ql"]
-[ext_resource type="Script" uid="uid://ud810jfnecws" path="res://scenes/tests/shadow_test/transform_change_tracker.gd" id="4_m4yvf"]
+[ext_resource type="Script" uid="uid://4yu0rqcar1r7" path="res://scenes/tests/shadow_test/simple_light_movement.gd" id="4_ppd20"]
 [ext_resource type="Script" uid="uid://dov4mvput3h5p" path="res://scenes/tests/shadow_test/disable_collider_on_shadow.gd" id="5_m4yvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wqunc"]
@@ -53,21 +53,33 @@ light = NodePath("../../LevelContainer/SpotLight3D")
 [node name="LevelContainer" type="Node3D" parent="." unique_id=1563689866]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="LevelContainer" unique_id=184581214]
-transform = Transform3D(0.8412644, 0.14592268, -0.5205582, -0.1469999, 0.98834795, 0.039489526, 0.520255, 0.043300863, 0.85291255, -2.7606149, 3.1312685, 7.2072067)
+transform = Transform3D(0.87693554, 0.14960678, -0.4567297, -0.14769033, 0.9882191, 0.040131792, 0.457353, 0.03226157, 0.8886999, -3.916, 3.256, 7.207)
 light_energy = 16.0
 light_size = 0.165
 shadow_enabled = true
 spot_range = 25.285
 spot_angle = 37.8
 
-[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D" unique_id=304892773 node_paths=PackedStringArray("level_container", "shadow_container", "transform_change_tracker")]
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D" unique_id=304892773 node_paths=PackedStringArray("level_container", "shadow_container")]
 script = ExtResource("1_18wcm")
 level_container = NodePath("../..")
 shadow_container = NodePath("../../../ShadowContainer")
-transform_change_tracker = NodePath("TransformChangeTracker")
 
-[node name="TransformChangeTracker" type="Node" parent="LevelContainer/SpotLight3D/CollidableLight" unique_id=784912706]
-script = ExtResource("4_m4yvf")
+[node name="SpotLight3D2" type="SpotLight3D" parent="LevelContainer" unique_id=1897985476]
+transform = Transform3D(0.35261628, 0.14356302, 0.9246899, -0.19620739, 0.9775386, -0.07694725, -0.9149671, -0.15429811, 0.37286443, -7.3803167, 3.256, -2.2843513)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 25.285
+spot_angle = 37.8
+
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2" unique_id=173173742 node_paths=PackedStringArray("level_container", "shadow_container")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../..")
+shadow_container = NodePath("../../../ShadowContainer")
+
+[node name="SimpleMovement" type="Node" parent="LevelContainer/SpotLight3D2" unique_id=424390524]
+script = ExtResource("4_ppd20")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer" unique_id=809632510]
 environment = SubResource("Environment_5dnud")
@@ -77,6 +89,7 @@ collision_layer = 11
 collision_mask = 20
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Floor" unique_id=600511667]
+cast_shadow = 0
 mesh = SubResource("BoxMesh_gepqh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Floor" unique_id=1132417981]
@@ -105,9 +118,45 @@ script = ExtResource("3_ppd20")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow2" unique_id=1351798686]
 shape = SubResource("BoxShape3D_sg0in")
 
+[node name="CastingCollidableShadow7" type="StaticBody3D" parent="LevelContainer" unique_id=1323995185]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.156523, 1.5317631, -4.7517996)
+
+[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow7" unique_id=272733006]
+material_override = SubResource("StandardMaterial3D_fe35m")
+mesh = SubResource("BoxMesh_nmvmi")
+script = ExtResource("3_ppd20")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow7" unique_id=909531867]
+shape = SubResource("BoxShape3D_sg0in")
+
+[node name="CastingCollidableShadow8" type="StaticBody3D" parent="LevelContainer" unique_id=1585625655]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.452465, 1.5317631, -4.7517996)
+
+[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow8" unique_id=1663325128]
+material_override = SubResource("StandardMaterial3D_fe35m")
+mesh = SubResource("BoxMesh_nmvmi")
+script = ExtResource("3_ppd20")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow8" unique_id=303911068]
+shape = SubResource("BoxShape3D_sg0in")
+
+[node name="CastingCollidableShadow9" type="StaticBody3D" parent="LevelContainer" unique_id=37000924]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.583313, 3.9437046, -4.7517996)
+
+[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow9" unique_id=1700965392]
+material_override = SubResource("StandardMaterial3D_fe35m")
+mesh = SubResource("BoxMesh_nmvmi")
+script = ExtResource("3_ppd20")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow9" unique_id=1364405838]
+shape = SubResource("BoxShape3D_sg0in")
+
 [node name="CastingCollidableShadow3" type="StaticBody3D" parent="LevelContainer" unique_id=1883027696]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8680744, 2.1163568, -1.6752365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2777319, 2.1163568, -1.6752365)
 
 [node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow3" unique_id=587546299]
 material_override = SubResource("StandardMaterial3D_fe35m")
@@ -176,6 +225,7 @@ collision_mask = 5
 shape = SubResource("BoxShape3D_fe35m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall" unique_id=1673610944]
+cast_shadow = 0
 mesh = SubResource("BoxMesh_sg0in")
 
 [node name="Wall2" type="StaticBody3D" parent="LevelContainer" unique_id=604039899]
@@ -188,6 +238,7 @@ collision_mask = 5
 shape = SubResource("BoxShape3D_fe35m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall2" unique_id=340622384]
+cast_shadow = 0
 mesh = SubResource("BoxMesh_sg0in")
 
 [node name="Marker3D" type="Marker3D" parent="LevelContainer" unique_id=1126659322]

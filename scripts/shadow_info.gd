@@ -64,15 +64,11 @@ func _intersection_point(
 		Utils.CollisionLayers.WALLS_SHADOW_RECEIVER
 	)
 	var hit := space.intersect_ray(query)
-	print("from:",from)
-	print("to:",to)
-	print("dir:",dir)
 	var hit_pos: Vector3
 	if hit.is_empty():
 		hit_pos = to - origin
 	else:
 		hit_pos = hit.position - origin
-	print(hit_pos)
 	return hit_pos
 
 func _extrusion_point(
