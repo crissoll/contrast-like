@@ -24,7 +24,7 @@ roughness = 0.16
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
-emission = Color(0.6825102, 0.75545603, 0.9399663, 1)
+emission = Color(0.4979001, 0.5248784, 0.5931174, 1)
 emission_energy_multiplier = 10.63
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_77qcy"]
