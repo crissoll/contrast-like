@@ -1,23 +1,72 @@
 [gd_scene format=3 uid="uid://d4ld5wf4vkq2s"]
 
+[ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_cvvee"]
+
+[sub_resource type="Environment" id="Environment_xrv2b"]
+background_mode = 1
+background_color = Color(0.13715622, 0.15999487, 0.25109702, 1)
+background_energy_multiplier = 2.15
+ambient_light_source = 2
+ambient_light_color = Color(0.14555252, 0.16349518, 0.26052514, 1)
+ambient_light_energy = 3.31
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.22745098, 0.2509804, 0.3764706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vub1y"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.17875856, 3.272891e-06, 0.7965705, 1)
+emission_energy_multiplier = 3.66
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_77qcy"]
+material = SubResource("StandardMaterial3D_vub1y")
+
 [node name="room_01" type="Node3D" unique_id=1010355922]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=350227890]
+environment = SubResource("Environment_xrv2b")
 
 [node name="shell" type="CSGCombiner3D" parent="." unique_id=1635066117]
+transform = Transform3D(2.5300002, 0, 0, 0, 3.5512767, 0, 0, 0, 2.2541752, 0, 0, 0)
 
 [node name="floor" type="CSGBox3D" parent="shell" unique_id=486004357]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, -0.0027387156, -0.46902445, 0.28390136)
 size = Vector3(14, 0.2, 14)
 
+[node name="ceiling" type="CSGBox3D" parent="shell" unique_id=16302911]
+transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380631, 0.12728001, 5.4400682, 0.09166309)
+size = Vector3(14.456665, 0.2, 14.310547)
+
 [node name="wall_back" type="CSGBox3D" parent="shell" unique_id=1995027752]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -7)
+transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, -0.0027387156, 2.544268, -8.382542)
 size = Vector3(14, 5, 0.3)
 
 [node name="wall_left" type="CSGBox3D" parent="shell" unique_id=2092194333]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 0)
+transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, -8.015414, 2.544268, 0.28390136)
 size = Vector3(0.3, 5, 14)
 
 [node name="wall_right" type="CSGBox3D" parent="shell" unique_id=1494822108]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.5, 0)
+transform = Transform3D(1.144668, 0, 0, 0, 1.1589586, 0, 0, 0, 1.2380632, 8.009936, 2.544268, 0.28390136)
 size = Vector3(0.3, 5, 14)
+
+[node name="window_cut_1" type="CSGBox3D" parent="shell" unique_id=1600683612]
+transform = Transform3D(1, 0, 0, 0, 2.2726827, 0, 0, 0, 2.0351584, -0.46164587, 2.0003395, -9.201352)
+operation = 2
+size = Vector3(1.2302246, 1.1463623, 1.590332)
+
+[node name="lights" type="Node3D" parent="." unique_id=95926576]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lights" unique_id=698598271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0069289505, 0.65078354, 0.34068167)
+light_color = Color(0.5406625, 0.42728928, 0.99998814, 1)
+light_energy = 6.465
+omni_range = 19.857
+omni_attenuation = 1.297
+
+[node name="Player" parent="." unique_id=792214008 instance=ExtResource("1_cvvee")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5.7634373)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1441038526]
+transform = Transform3D(40.47513, 0, 0, 0, 0.00707051, 19.93936, 0, 1.0483549, -0.13447873, 0, 14.10376, -27.12262)
+mesh = SubResource("PlaneMesh_77qcy")
