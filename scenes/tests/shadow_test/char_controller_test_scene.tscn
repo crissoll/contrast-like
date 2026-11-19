@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dwb4ubwmjmbbe" path="res://scenes/tests/shadow_test/collidable_light.gd" id="1_18wcm"]
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_rokcr"]
 [ext_resource type="Script" uid="uid://bdtwpreb0uelo" path="res://scenes/tests/shadow_test/shadow_component.gd" id="2_18wcm"]
-[ext_resource type="Script" uid="uid://dp0xb64y30sjm" path="res://scenes/tests/shadow_test/collidable_shadow.gd" id="3_ppd20"]
 [ext_resource type="Script" uid="uid://cr0tufumawbev" path="res://scenes/tests/shadow_test/shadow_trigger_event.gd" id="4_7m8ql"]
 [ext_resource type="Script" uid="uid://4yu0rqcar1r7" path="res://scenes/tests/shadow_test/simple_light_movement.gd" id="4_ppd20"]
+[ext_resource type="PackedScene" uid="uid://d36y5xh7ylcr4" path="res://scenes/tests/shadow_test/cube_obstacle.tscn" id="5_7m8ql"]
 [ext_resource type="Script" uid="uid://dov4mvput3h5p" path="res://scenes/tests/shadow_test/disable_collider_on_shadow.gd" id="5_m4yvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wqunc"]
@@ -25,13 +25,6 @@ size = Vector3(80, 0.1, 80)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_au7uu"]
 size = Vector3(80, 0.1, 80)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe35m"]
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_nmvmi"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_sg0in"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fe35m"]
 size = Vector3(63, 15, 1)
@@ -95,112 +88,32 @@ mesh = SubResource("BoxMesh_gepqh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Floor" unique_id=1132417981]
 shape = SubResource("BoxShape3D_au7uu")
 
-[node name="CastingCollidableShadow" type="StaticBody3D" parent="LevelContainer" unique_id=766248539]
+[node name="CubeObstacle" parent="LevelContainer" unique_id=1905592916 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5317631, -0.024746656)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow" unique_id=832813470]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow" unique_id=52987191]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow2" type="StaticBody3D" parent="LevelContainer" unique_id=142236866]
-unique_name_in_owner = true
+[node name="Obstacle" parent="LevelContainer" unique_id=1776418333 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0852695, 1.5317631, 1.5200064)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow2" unique_id=1359343194]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow2" unique_id=1351798686]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow7" type="StaticBody3D" parent="LevelContainer" unique_id=1323995185]
-unique_name_in_owner = true
+[node name="Obstacle2" parent="LevelContainer" unique_id=1909306886 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.156523, 1.5317631, -4.7517996)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow7" unique_id=272733006]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow7" unique_id=909531867]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow8" type="StaticBody3D" parent="LevelContainer" unique_id=1585625655]
-unique_name_in_owner = true
+[node name="Obstacle3" parent="LevelContainer" unique_id=783386600 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.452465, 1.5317631, -4.7517996)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow8" unique_id=1663325128]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow8" unique_id=303911068]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow9" type="StaticBody3D" parent="LevelContainer" unique_id=37000924]
-unique_name_in_owner = true
+[node name="Obstacle4" parent="LevelContainer" unique_id=1510287969 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.583313, 3.9437046, -4.7517996)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow9" unique_id=1700965392]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow9" unique_id=1364405838]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow3" type="StaticBody3D" parent="LevelContainer" unique_id=1883027696]
-unique_name_in_owner = true
+[node name="Obstacle5" parent="LevelContainer" unique_id=456018481 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2777319, 2.1163568, -1.6752365)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow3" unique_id=587546299]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow3" unique_id=717419424]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow4" type="StaticBody3D" parent="LevelContainer" unique_id=1773963172]
-unique_name_in_owner = true
+[node name="Obstacle6" parent="LevelContainer" unique_id=745161666 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.176784, 3.628408, 2.130277)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow4" unique_id=1524936529]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow4" unique_id=967402728]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow5" type="StaticBody3D" parent="LevelContainer" unique_id=1895638285]
-unique_name_in_owner = true
+[node name="Obstacle7" parent="LevelContainer" unique_id=1165397032 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8545804, 3.628408, -1.752094)
 
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow5" unique_id=296717119]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow5" unique_id=1784646926]
-shape = SubResource("BoxShape3D_sg0in")
-
-[node name="CastingCollidableShadow6" type="StaticBody3D" parent="LevelContainer" unique_id=374308726]
-unique_name_in_owner = true
+[node name="Obstacle8" parent="LevelContainer" unique_id=73671073 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111099, 2.4194112, -3.023629)
-
-[node name="CollidableShadow" type="MeshInstance3D" parent="LevelContainer/CastingCollidableShadow6" unique_id=1231422869]
-material_override = SubResource("StandardMaterial3D_fe35m")
-mesh = SubResource("BoxMesh_nmvmi")
-script = ExtResource("3_ppd20")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/CastingCollidableShadow6" unique_id=689455566]
-shape = SubResource("BoxShape3D_sg0in")
 
 [node name="BoxShadow" type="Area3D" parent="LevelContainer" unique_id=1180783219]
 collision_mask = 5
