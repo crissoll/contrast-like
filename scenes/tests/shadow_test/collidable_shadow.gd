@@ -1,7 +1,15 @@
 class_name CollidableShadow
 extends MeshInstance3D
 
-@export var shadow_collision: CollisionShape3D      # shadow collision shape
+@onready
+var shadow_collision: CollisionShape3D = (func():
+	var _shadow_collision := CollisionShape3D.new()
+	var shadow_body := StaticBody3D.new()
+	shadow_body.collision_layer = 32
+	shadow_body.add_child(_shadow_collision)
+	get_parent().add_sibling.call_deferred(shadow_body)
+	return _shadow_collision
+	).call()
 @export var light: Light3D
 @export_flags_3d_physics var target_mask: int = 8  # floor/walls which receive the shadow
 @export var extrusion_direction := Vector3.ZERO
