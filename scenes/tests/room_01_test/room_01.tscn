@@ -111,12 +111,18 @@ transform = Transform3D(1.3592172e-06, -0.87643135, -3.7393977e-07, 1.1882655e-1
 mesh = SubResource("PlaneMesh_77qcy")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="lights" unique_id=698598271]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0069289505, 2.0504417, 0.34068167)
-visible = false
-light_color = Color(0.47511578, 0.43485978, 1, 1)
-light_energy = 6.465
-omni_range = 49.129
-omni_attenuation = 0.901
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.436077, 5.6549854, -11.410798)
+light_color = Color(0.7212212, 0.19242987, 0.50325227, 1)
+light_energy = 4.881
+omni_range = 19.857
+omni_attenuation = 1.594
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="lights" unique_id=2033436693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.933983, 11.474085, 12.023038)
+light_color = Color(0.7212212, 0.19242987, 0.50325227, 1)
+light_energy = 4.881
+omni_range = 19.857
+omni_attenuation = 1.594
 
 [node name="searchlight" type="SpotLight3D" parent="lights" unique_id=279815472]
 transform = Transform3D(-0.19367975, -0.6597247, 0.7261208, -0.4623349, 0.7141733, 0.5255501, -0.8652945, -0.2339226, -0.44333464, 27.158989, 15.208811, -15.8957405)
