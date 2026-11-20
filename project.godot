@@ -97,6 +97,7 @@ shadow_form={
 3d_physics/layer_4="walls_shadow_receiver"
 3d_physics/layer_5="shadow_player"
 3d_physics/layer_6="collidable_shadows"
+3d_physics/layer_7="interactable_light"
 
 [physics]
 

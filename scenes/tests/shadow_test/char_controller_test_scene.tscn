@@ -53,10 +53,11 @@ shadow_enabled = true
 spot_range = 25.285
 spot_angle = 37.8
 
-[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D" unique_id=304892773 node_paths=PackedStringArray("level_container", "shadow_container")]
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D" unique_id=304892773 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
 script = ExtResource("1_18wcm")
 level_container = NodePath("../..")
 shadow_container = NodePath("../../../ShadowContainer")
+light = NodePath("..")
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="LevelContainer" unique_id=1897985476]
 transform = Transform3D(0.35261628, 0.14356302, 0.9246899, -0.19620739, 0.9775386, -0.07694725, -0.9149671, -0.15429811, 0.37286443, -7.3803167, 3.256, -2.2843513)
@@ -66,10 +67,11 @@ shadow_enabled = true
 spot_range = 25.285
 spot_angle = 37.8
 
-[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2" unique_id=173173742 node_paths=PackedStringArray("level_container", "shadow_container")]
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2" unique_id=173173742 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
 script = ExtResource("1_18wcm")
 level_container = NodePath("../..")
 shadow_container = NodePath("../../../ShadowContainer")
+light = NodePath("..")
 
 [node name="SimpleMovement" type="Node" parent="LevelContainer/SpotLight3D2" unique_id=424390524]
 script = ExtResource("4_ppd20")
