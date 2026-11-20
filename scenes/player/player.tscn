@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dggqd7qmgkdq0"]
 
 [ext_resource type="Script" uid="uid://cexo12t1pvsdr" path="res://scripts/player/player.gd" id="1_wph10"]
+[ext_resource type="Script" uid="uid://bdtwpreb0uelo" path="res://scenes/tests/shadow_test/shadow_component.gd" id="2_p47bc"]
 [ext_resource type="PackedScene" uid="uid://da8jmhf0sdugr" path="res://scenes/player/comp_camera_handler.tscn" id="2_t0fl0"]
 [ext_resource type="PackedScene" uid="uid://bhkad377uwbnm" path="res://scenes/player/state_machine.tscn" id="3_t0fl0"]
 [ext_resource type="PackedScene" uid="uid://c7g5rw3652nl2" path="res://scenes/player/camera_container.tscn" id="3_vm3kk"]
@@ -12,15 +13,19 @@
 [sub_resource type="BoxMesh" id="BoxMesh_au7uu"]
 size = Vector3(0.03314209, 0.24316406, 0.75161743)
 
-[node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "visuals", "collision_shape")]
+[node name="Player" type="CharacterBody3D" unique_id=792214008 node_paths=PackedStringArray("camera_rig", "comp_shadow", "visuals", "collision_shape")]
 collision_layer = 4
 script = ExtResource("1_wph10")
 camera_rig = NodePath("CompCameraHandler")
+comp_shadow = NodePath("CompShadow")
 visuals = NodePath("Visuals")
 collision_shape = NodePath("CollisionShape3D")
 walk_speed = 4.5
 overall_gravity_scale = 1.4
 strength_double_jump = 0.9
+
+[node name="CompShadow" type="Node" parent="." unique_id=2037517100]
+script = ExtResource("2_p47bc")
 
 [node name="CompCameraHandler" parent="." unique_id=2084906784 node_paths=PackedStringArray("camera_allignment_target_node") instance=ExtResource("2_t0fl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0104294, 0)

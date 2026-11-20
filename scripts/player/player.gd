@@ -4,10 +4,12 @@ extends CharacterBody3D
 #region References
 @export_group("References")
 @export var camera_rig: CompCameraHandler
+@export var comp_shadow : CompShadow
 #@export var camera_target: Node3D
 @export var visuals: Node3D
 @export var animation_tree: AnimationTree
 @export var collision_shape : CollisionShape3D
+
 #endregion 
 
 
@@ -74,11 +76,18 @@ func get_move_input_vector() -> Vector2:
 
 func get_move_direction() -> Vector3:
 	var input := get_move_input_vector()
+	var dir : Vector3
 	if input == Vector2.ZERO:
 		return Vector3.ZERO
-
-	var dir := camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
 	
+	if !comp_shadow.is_shadow:
+		dir = camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
+		print(dir)
+	else:
+		#dir = comp_shadow._get_normal() + Vector3(input.x, 0.0, input.y)
+		dir = -Vector3(input.x, 0.0, input.y).rotated(up_direction,comp_shadow._get_normal().angle_to(Vector3(0,0,-1)))
+		print(dir)
+		
 	# redundant since camera_rig doesn't rotate on y, but better safe than sorry
 	dir.y = 0.0
 	return dir.normalized()

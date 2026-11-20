@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dwb4ubwmjmbbe" path="res://scenes/tests/shadow_test/collidable_light.gd" id="1_18wcm"]
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_rokcr"]
-[ext_resource type="Script" uid="uid://bdtwpreb0uelo" path="res://scenes/tests/shadow_test/shadow_component.gd" id="2_18wcm"]
 [ext_resource type="Script" uid="uid://4yu0rqcar1r7" path="res://scenes/tests/shadow_test/simple_light_movement.gd" id="4_ppd20"]
 [ext_resource type="PackedScene" uid="uid://d36y5xh7ylcr4" path="res://scenes/tests/shadow_test/cube_obstacle.tscn" id="5_7m8ql"]
 
@@ -32,14 +31,7 @@ size = Vector3(63, 15, 1)
 
 [node name="CharacterControllerTestScene" type="Node3D" unique_id=2059027252]
 
-[node name="Player" parent="." unique_id=792214008 groups=["player"] instance=ExtResource("1_rokcr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0499998, 0)
-collision_mask = 9
-
-[node name="ShadowComponent" type="Node" parent="Player" unique_id=1315505071 node_paths=PackedStringArray("initial_pos", "light")]
-script = ExtResource("2_18wcm")
-initial_pos = NodePath("../../LevelContainer/Marker3D")
-light = NodePath("../../LevelContainer/SpotLight3D")
+[node name="Player" parent="." unique_id=792214008 instance=ExtResource("1_rokcr")]
 
 [node name="LevelContainer" type="Node3D" parent="." unique_id=1563689866]
 
@@ -141,6 +133,6 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_sg0in")
 
 [node name="Marker3D" type="Marker3D" parent="LevelContainer" unique_id=1126659322]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8177013, 1.2681822, -5.1540875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8177013, 1.2681822, -5.2022986)
 
 [node name="ShadowContainer" type="Node3D" parent="." unique_id=1289339809]

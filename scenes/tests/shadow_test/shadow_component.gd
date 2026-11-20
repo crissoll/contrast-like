@@ -1,7 +1,9 @@
 class_name CompShadow
 extends Node
 
-@export var initial_pos: Marker3D
+
+@onready var initial_pos: Marker3D = $"../../LevelContainer/Marker3D"
+
 
 @export_group("Transition")
 @export var transition_time := 0.6
@@ -14,7 +16,7 @@ extends Node
 @export var wall_check_distance := 2.0
 @export var corner_margin := 0.1
 
-@export var light : SpotLight3D
+@onready var light: SpotLight3D = $"../../LevelContainer/SpotLight3D"
 
 var is_shadow := false
 var last_player_pos: Vector3
@@ -120,16 +122,23 @@ func _check_inner_corner() -> void:
 
 	var wall_right := Vector3.UP.cross(_wall_normal)
 	var dir := wall_right * signf(input_x)
-
-	var hit := _find_wall(player.global_position, dir, wall_offset + corner_margin)
-	if not hit.is_empty():
-		_wall_normal = hit.normal
+	
+	_update_wall_normal(dir)
 		
 ## finds the wall where the player will be sticked to
 func _find_wall(from: Vector3, dir: Vector3, length := wall_check_distance) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(
 		from, from + dir.normalized() * length, wall_mask)
 	return player.get_world_3d().direct_space_state.intersect_ray(query)
+	
+func _get_normal() -> Vector3:
+	_check_inner_corner()
+	return _wall_normal
+
+func _update_wall_normal(dir : Vector3) -> void:
+	var hit := _find_wall(player.global_position, dir, wall_offset + corner_margin)
+	if not hit.is_empty():
+		_wall_normal = hit.normal
 	
 #endregion
 

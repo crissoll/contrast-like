@@ -7,7 +7,7 @@ func enter(_previous_state: States, _data := {}) -> void:
 func _ready() -> void:
 	await get_parent().ready
 	gravity_scale = player.falling_gravity_multiplier
-
+	
 func physics_update(_delta: float) -> void:
 	if check_landing():
 		return

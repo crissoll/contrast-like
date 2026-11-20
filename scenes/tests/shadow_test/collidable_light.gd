@@ -23,6 +23,7 @@ func add_mesh_surface(mesh:Mesh):
 	meshes_surfaces[mesh] = PackedVector3Array(seen.keys())
 
 func compute_mesh_shadow_info(mesh:MeshInstance3D) -> void:
+	#and (mesh.get_parent() as StaticBody3D).get_collision_layer_value() != Utils.CollisionLayers.
 	if !is_point_in_light_area(mesh.global_position):
 		return
 	if mesh not in shadows_infos:
