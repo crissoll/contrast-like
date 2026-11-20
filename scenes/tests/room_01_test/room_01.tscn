@@ -32,8 +32,8 @@ material = SubResource("StandardMaterial3D_vub1y")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_77qcy"]
 top_radius = 0.0
-bottom_radius = 0.4
-height = 3.8597412
+bottom_radius = 0.35
+height = 3.8963318
 cap_top = false
 cap_bottom = false
 
@@ -41,10 +41,13 @@ cap_bottom = false
 transparency = 1
 blend_mode = 1
 shading_mode = 0
-albedo_color = Color(0.8595448, 0.88118, 0.96513134, 0.21176471)
+albedo_color = Color(0.8633, 0.88464004, 0.97, 0.32941177)
 albedo_texture = ExtResource("2_5krkw")
-uv1_scale = Vector3(1.7, 1.7, 1.7)
+uv1_scale = Vector3(1.6, 1.6, 1.6)
 proximity_fade_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vub1y"]
+height = 6.4359283
 
 [node name="room_01" type="Node3D" unique_id=1010355922]
 
@@ -80,11 +83,6 @@ size = Vector3(0.3, 5, 14)
 transform = Transform3D(1.0000004, 0, 0, 0, 2.3565903, 0, 0, 0, 2.0351589, 2.7641861, 3.38812, -9.201352)
 operation = 2
 size = Vector3(1.4491577, 1.1463623, 1.590332)
-
-[node name="window_cut_6" type="CSGBox3D" parent="shell" unique_id=951852051]
-transform = Transform3D(1.0000004, 0, 0, 0, 2.3566098, 0, 0, 0, 2.0351589, 4.9918528, 2.3984652, -9.201352)
-operation = 2
-size = Vector3(1.4491577, 1.9862671, 1.590332)
 
 [node name="window_cut_2" type="CSGBox3D" parent="shell" unique_id=1165451055]
 transform = Transform3D(1.0000004, 0, 0, 0, 2.3565905, 0, 0, 0, 2.0351589, 0.4771878, 3.38812, -9.201352)
@@ -130,6 +128,34 @@ size = Vector3(6.4820557, 0.40722656, 3.4750977)
 transform = Transform3D(2.2366782e-08, 0.16106589, 0, -0.5116954, 7.0405206e-09, 0, 0, 0, -0.14533444, 0.7321917, 3.543962, -8.136418)
 size = Vector3(6.4820557, 0.40722656, 3.4750977)
 
+[node name="window_union_7" type="CSGBox3D" parent="shell" unique_id=671995624]
+transform = Transform3D(0.37993735, 0, 0.001454918, 0, 0.16399634, 0, 0.0022961549, 0, -0.24074171, 2.7938428, 3.399393, -8.270967)
+size = Vector3(6.236084, 1, 3.4750977)
+
+[node name="window_union_8" type="CSGBox3D" parent="shell" unique_id=1007026301]
+transform = Transform3D(2.2366782e-08, 0.16106589, 0, -0.5116953, 7.04052e-09, 0, 0, 0, -0.14533444, 2.4636667, 3.5439625, -8.136418)
+size = Vector3(6.4820557, 0.40722656, 3.4750977)
+
+[node name="window_union_9" type="CSGBox3D" parent="shell" unique_id=27338280]
+transform = Transform3D(2.2366784e-08, 0.16106589, 0, -0.51169544, 7.0405215e-09, 0, 0, 0, -0.14533444, 3.0049114, 3.5439625, -8.136418)
+size = Vector3(6.4820557, 0.40722656, 3.4750977)
+
+[node name="window_cut_6" type="CSGBox3D" parent="shell" unique_id=951852051]
+transform = Transform3D(1.1067975, 0, 0, 0, 2.2580028, 0, 0, 0, 2.0351589, 4.9918528, 3.0978198, -7.82263)
+size = Vector3(1.4491577, 1.7294617, 0.28527832)
+
+[node name="window_sphere_cut" type="CSGSphere3D" parent="shell" unique_id=1091778209]
+transform = Transform3D(1.5000006, 0, 0, 0, 1.6025513, 0, 0, 0, 1.5000006, 5.0253325, 3.641561, -7.993007)
+operation = 2
+
+[node name="column" type="CSGBox3D" parent="shell" unique_id=1991330101]
+transform = Transform3D(10, 0, 0, 0, 11.964245, 0, 0, 0, 13.034217, -4.6465554, 2.270603, 4.059257)
+size = Vector3(0.08008194, 0.5666504, 0.04272461)
+
+[node name="top_brick" type="CSGBox3D" parent="shell" unique_id=478256207]
+transform = Transform3D(-4.3712353e-07, -11.964263, 0, 10.00037, -5.22993e-07, 0, 0, 0, 10.000003, -0.05918231, 5.081792, 3.9664867)
+size = Vector3(0.07971287, 1.3976212, 0.024169922)
+
 [node name="lights" type="Node3D" parent="." unique_id=95926576]
 
 [node name="emission_panel_1" type="MeshInstance3D" parent="lights" unique_id=1441038526]
@@ -174,6 +200,26 @@ spot_angle_attenuation = 1.4142141
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5.7634373)
 
 [node name="fakelight" type="MeshInstance3D" parent="." unique_id=33368122]
-transform = Transform3D(-7.0695868, 10.730139, -0.07250025, 5.548723, 5.6683745, -5.032221, -6.444944, -6.889957, -4.252923, 5.4942045, 3.937027, -1.4997725)
+transform = Transform3D(-6.948666, 10.828191, -0.36840755, 5.845163, 5.2056236, -5.024551, -6.3130693, -7.098567, -4.246649, 5.7155743, 4.6694455, -1.6258264)
 mesh = SubResource("CylinderMesh_77qcy")
 surface_material_override/0 = SubResource("StandardMaterial3D_76q71")
+
+[node name="pipes" type="Node3D" parent="." unique_id=1914434760]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pipes" unique_id=909591048]
+transform = Transform3D(3, 0, 0, 0, -4.371139e-07, -2.76, 0, 10, -1.2064343e-07, -25.301834, 14.787402, -11.052776)
+mesh = SubResource("CylinderMesh_vub1y")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="pipes" unique_id=1776119974]
+transform = Transform3D(3, 0, 0, 0, -4.371139e-07, -2.76, 0, 10, -1.2064343e-07, -21.469156, 14.787402, -11.052776)
+mesh = SubResource("CylinderMesh_vub1y")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="pipes" unique_id=1170605405]
+transform = Transform3D(-1.3113416e-07, 10, -1.2064342e-07, 0, -4.371139e-07, -2.7599998, -2.9999998, -4.371139e-07, 5.2734916e-15, 0.23261833, 18.003082, -11.052776)
+mesh = SubResource("CylinderMesh_vub1y")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="pipes" unique_id=1905614795]
+transform = Transform3D(-1.3113416e-07, 10, -1.2064342e-07, 0, -4.371139e-07, -2.7599998, -2.9999998, -4.371139e-07, 5.2734916e-15, 1.919096, 7.8579674, -16.970459)
+mesh = SubResource("CylinderMesh_vub1y")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=826901269]
