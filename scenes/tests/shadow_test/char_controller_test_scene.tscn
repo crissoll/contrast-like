@@ -3,10 +3,8 @@
 [ext_resource type="Script" uid="uid://dwb4ubwmjmbbe" path="res://scenes/tests/shadow_test/collidable_light.gd" id="1_18wcm"]
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_rokcr"]
 [ext_resource type="Script" uid="uid://bdtwpreb0uelo" path="res://scenes/tests/shadow_test/shadow_component.gd" id="2_18wcm"]
-[ext_resource type="Script" uid="uid://cr0tufumawbev" path="res://scenes/tests/shadow_test/shadow_trigger_event.gd" id="4_7m8ql"]
 [ext_resource type="Script" uid="uid://4yu0rqcar1r7" path="res://scenes/tests/shadow_test/simple_light_movement.gd" id="4_ppd20"]
 [ext_resource type="PackedScene" uid="uid://d36y5xh7ylcr4" path="res://scenes/tests/shadow_test/cube_obstacle.tscn" id="5_7m8ql"]
-[ext_resource type="Script" uid="uid://dov4mvput3h5p" path="res://scenes/tests/shadow_test/disable_collider_on_shadow.gd" id="5_m4yvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wqunc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -116,20 +114,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8545804, 3.628408, -1.75209
 
 [node name="Obstacle8" parent="LevelContainer" unique_id=73671073 instance=ExtResource("5_7m8ql")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111099, 2.4194112, -3.023629)
-
-[node name="BoxShadow" type="Area3D" parent="LevelContainer" unique_id=1180783219]
-collision_mask = 5
-
-[node name="ShadowTriggerEvent" type="Node" parent="LevelContainer/BoxShadow" unique_id=862709742 node_paths=PackedStringArray("area")]
-script = ExtResource("4_7m8ql")
-area = NodePath("..")
-
-[node name="DisableColliderOnShadow" type="Node" parent="LevelContainer/BoxShadow" unique_id=1796011239 node_paths=PackedStringArray("area", "target_shape")]
-script = ExtResource("5_m4yvf")
-area = NodePath("..")
-target_shape = NodePath("../../Floor/CollisionShape3D")
-
-[node name="ShadowCollisionShape" type="CollisionShape3D" parent="LevelContainer/BoxShadow" unique_id=1687961853]
 
 [node name="Wall" type="StaticBody3D" parent="LevelContainer" unique_id=1493682869]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -6.1990848)

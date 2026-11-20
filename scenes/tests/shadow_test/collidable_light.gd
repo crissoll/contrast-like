@@ -63,6 +63,7 @@ var light_area: Area3D = (func() -> Area3D:
 	add_child(_light_area)
 	return _light_area
 	).call()
+	
 func _ready() -> void:
 	var transform_notifier := TransformNotifier.new()
 	transform_notifier.transform_changed.connect(_on_transform_notifier_transform_changed)
