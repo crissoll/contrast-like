@@ -12,6 +12,27 @@ var transform_change_tracker: TransformChangeTracker
 static var meshes_surfaces : Dictionary[Mesh,PackedVector3Array]
 var shadows_infos : Dictionary[MeshInstance3D,MeshShadowInfo]
 
+func compute_mesh_shadow_info(mesh:MeshInstance3D) -> void:
+	if !is_point_in_light_area(mesh.global_position):
+		return
+	if mesh not in shadows_infos:
+		add_shadow_info(mesh)
+
+	shadows_infos[mesh].update_shadow(
+		mesh.global_transform,
+		meshes_surfaces[mesh.mesh],
+		global_position,
+		-global_transform.basis.z,
+		max_ray_length
+	)
+	
+func add_shadow_info(mesh:MeshInstance3D) -> void:
+	add_mesh_surface(mesh.mesh)
+	var mesh_shadow_info := MeshShadowInfo.new()
+	shadow_container.add_child(mesh_shadow_info.shadow_body)
+	shadows_infos[mesh] = mesh_shadow_info
+	
+
 func add_mesh_surface(mesh:Mesh):
 	if mesh in meshes_surfaces:
 		return
@@ -22,25 +43,7 @@ func add_mesh_surface(mesh:Mesh):
 			seen[vert] = true
 	meshes_surfaces[mesh] = PackedVector3Array(seen.keys())
 
-func compute_mesh_shadow_info(mesh:MeshInstance3D) -> void:
 
-	if !is_point_in_light_area(mesh.global_position):
-		return
-	if mesh not in shadows_infos:
-		add_shadow_info(mesh)
-	shadows_infos[mesh].update_shadow(
-		mesh.global_transform,
-		meshes_surfaces[mesh.mesh],
-		global_position,
-		-global_transform.basis.z,
-		max_ray_length
-	)
-
-func add_shadow_info(mesh:MeshInstance3D) -> void:
-	add_mesh_surface(mesh.mesh)
-	var mesh_shadow_info := MeshShadowInfo.new()
-	shadow_container.add_child(mesh_shadow_info.shadow_body)
-	shadows_infos[mesh] = mesh_shadow_info
 
 @onready
 var light_area: Area3D = (func() -> Area3D:
@@ -72,6 +75,8 @@ func _ready() -> void:
 	transform_change_tracker = TransformChangeTracker.new()
 	add_child(transform_change_tracker)
 	transform_change_tracker.node_transform_changed.connect(compute_mesh_shadow_info)
+	
+	
 	var meshes : Array[MeshInstance3D]
 	meshes.assign(level_container.find_children("*","MeshInstance3D",true))
 	for mesh in meshes:

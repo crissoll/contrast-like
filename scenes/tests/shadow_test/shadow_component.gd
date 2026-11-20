@@ -1,7 +1,7 @@
 class_name CompShadow
 extends Node
 
-
+#TODO modify this
 @onready var initial_pos: Marker3D = $"../../LevelContainer/Marker3D"
 
 
@@ -16,6 +16,7 @@ extends Node
 @export var wall_check_distance := 2.0
 @export var corner_margin := 0.1
 
+#TODO modify this
 @onready var light: SpotLight3D = $"../../LevelContainer/SpotLight3D"
 
 var is_shadow := false

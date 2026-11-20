@@ -84,9 +84,8 @@ func get_move_direction() -> Vector3:
 		dir = camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
 		print(dir)
 	else:
-		#dir = comp_shadow._get_normal() + Vector3(input.x, 0.0, input.y)
-		dir = -Vector3(input.x, 0.0, input.y).rotated(up_direction,comp_shadow._get_normal().angle_to(Vector3(0,0,-1)))
-		print(dir)
+		var wall_right := up_direction.cross(comp_shadow._wall_normal)
+		dir = wall_right * input.x
 		
 	# redundant since camera_rig doesn't rotate on y, but better safe than sorry
 	dir.y = 0.0
