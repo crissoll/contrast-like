@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b7q55p2nh6815"]
+
+[ext_resource type="Script" uid="uid://dwb4ubwmjmbbe" path="res://scenes/tests/shadow_test/collidable_light.gd" id="1_uug4y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c2fn"]
+albedo_color = Color(0.84313726, 1, 0.29411766, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_fdm2o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fdm2o"]
+
+[node name="Ringlight" type="Node3D" unique_id=791470842]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=969892088]
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 25.285
+spot_angle = 37.8
+
+[node name="CollidableLight" type="Node3D" parent="SpotLight3D" unique_id=313215698 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_uug4y")
+level_container = NodePath("")
+shadow_container = NodePath("")
+light = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1306158278]
+
+[node name="CollidableShadow" type="MeshInstance3D" parent="StaticBody3D" unique_id=1720357622]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_3c2fn")
+mesh = SubResource("TorusMesh_fdm2o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1703296209]
+shape = SubResource("SphereShape3D_fdm2o")

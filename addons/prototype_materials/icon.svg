@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1{fill:#e44438}
+      .cls-2{fill:#009f93}
+      .cls-3{fill:#3d386c}
+      .cls-4{fill:#fabb55}
+      .cls-5{fill:#ffffff;stroke:#ffffff;stroke-width:128;stroke-miterlimit:10}
+    </style>
+  </defs>
+  <title>Artboard 1</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M205.368 0 L500 0 L500 500 L0 500 L0 205.368 C0 91.946 91.946 0 205.368 0 Z" class="cls-1"/>
+    <path d="M500 0 L794.632 0 C908.054 0 1000 91.946 1000 205.368 L1000 500 L500 500 Z" class="cls-2"/>
+    <path d="M500 500 L1000 500 L1000 794.632 C1000 908.054 908.054 1000 794.632 1000 L500 1000 Z" class="cls-3"/>
+    <path d="M0 500 L500 500 L500 1000 L205.368 1000 C91.946 1000 0 908.054 0 794.632 Z" class="cls-4"/>
+    <g>
+      <line x1="500" y1="0" x2="500" y2="1000" class="cls-5"/>
+      <line x1="1000" y1="500" x2="0" y2="500" class="cls-5"/>
+    </g>
+  </g>
+</svg>

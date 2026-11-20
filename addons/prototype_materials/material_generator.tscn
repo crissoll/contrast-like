@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://b0vkt4vksulxg"]
+
+[ext_resource type="Script" uid="uid://bjqufqkkcrd6i" path="res://addons/prototype_materials/materials_generator.gd" id="1_lm5y1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_al7xc"]
+size = Vector3(35, 1, 35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rfeen"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lm5y1"]
+size = Vector3(2, 6, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ong2y"]
+size = Vector3(4, 3, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kaui4"]
+size = Vector3(2, 5, 2)
+
+[sub_resource type="PrismMesh" id="PrismMesh_al7xc"]
+left_to_right = 0.0
+size = Vector3(4, 3, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kswe6"]
+size = Vector3(3, 10, 17)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ab57j"]
+size = Vector3(6, 1, 7)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_al7xc"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_al7xc"]
+inner_radius = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_al7xc"]
+top_radius = 3.0
+bottom_radius = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_al7xc"]
+radius = 2.0
+height = 4.0
+
+[node name="MaterialGenerator" type="Node3D" unique_id=870752895]
+script = ExtResource("1_lm5y1")
+metadata/_custom_type_script = "uid://bjqufqkkcrd6i"
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1076696027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_al7xc")
+
+[node name="Cube1" type="MeshInstance3D" parent="." unique_id=944640197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_rfeen")
+
+[node name="Cube2" type="MeshInstance3D" parent="." unique_id=323194524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -1)
+mesh = SubResource("BoxMesh_lm5y1")
+
+[node name="Cube3" type="MeshInstance3D" parent="." unique_id=694108760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 3.5)
+mesh = SubResource("BoxMesh_ong2y")
+
+[node name="Cube4" type="MeshInstance3D" parent="." unique_id=1083565289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2)
+mesh = SubResource("BoxMesh_kaui4")
+
+[node name="Ramp" type="MeshInstance3D" parent="." unique_id=199542292]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1, 1.5, 8)
+mesh = SubResource("PrismMesh_al7xc")
+
+[node name="Cube5" type="MeshInstance3D" parent="." unique_id=1459727476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 4.5, 3)
+mesh = SubResource("BoxMesh_kswe6")
+
+[node name="Cube6" type="MeshInstance3D" parent="." unique_id=601444865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 5, -10)
+mesh = SubResource("BoxMesh_ab57j")
+
+[node name="Capsule" type="MeshInstance3D" parent="." unique_id=1152667972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 6)
+mesh = SubResource("CapsuleMesh_al7xc")
+
+[node name="Torus" type="MeshInstance3D" parent="." unique_id=210976650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4)
+mesh = SubResource("TorusMesh_al7xc")
+
+[node name="Cilinder" type="MeshInstance3D" parent="." unique_id=160721003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+mesh = SubResource("CylinderMesh_al7xc")
+
+[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1883731607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 2)
+mesh = SubResource("SphereMesh_al7xc")

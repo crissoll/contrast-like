@@ -2,41 +2,222 @@
 
 [ext_resource type="Script" uid="uid://dwb4ubwmjmbbe" path="res://scenes/tests/shadow_test/collidable_light.gd" id="1_18wcm"]
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_rokcr"]
-[ext_resource type="Script" uid="uid://4yu0rqcar1r7" path="res://scenes/tests/shadow_test/simple_light_movement.gd" id="4_ppd20"]
+[ext_resource type="Texture2D" uid="uid://f6v4ureta2sf" path="res://addons/godot-prototype-texture/PNG/grid_512x512/grid_black_512x512.png" id="3_rokcr"]
 [ext_resource type="PackedScene" uid="uid://d36y5xh7ylcr4" path="res://scenes/tests/shadow_test/cube_obstacle.tscn" id="5_7m8ql"]
+[ext_resource type="Texture2D" uid="uid://dah25cfq8gbhy" path="res://addons/godot-prototype-texture/PNG/grid_512x512/grid_white_512x512.png" id="5_rokcr"]
+[ext_resource type="PackedScene" uid="uid://dlrmcmh7rhyic" path="res://scenes/tests/player_gym/obstacle_green.tscn" id="6_18wcm"]
+[ext_resource type="PackedScene" uid="uid://coona8bi7pooh" path="res://scenes/tests/player_gym/obstacle_red.tscn" id="7_ppd20"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wqunc"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_3bvwi"]
+[sub_resource type="Sky" id="Sky_nthwj"]
 sky_material = SubResource("ProceduralSkyMaterial_wqunc")
 
 [sub_resource type="Environment" id="Environment_5dnud"]
 background_mode = 2
-sky = SubResource("Sky_3bvwi")
+sky = SubResource("Sky_nthwj")
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18wcm"]
+albedo_texture = ExtResource("3_rokcr")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_gepqh"]
-size = Vector3(80, 0.1, 80)
+size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_au7uu"]
-size = Vector3(80, 0.1, 80)
+size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fe35m"]
-size = Vector3(63, 15, 1)
+size = Vector3(100, 30, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppd20"]
+albedo_texture = ExtResource("5_rokcr")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_sg0in"]
-size = Vector3(63, 15, 1)
+size = Vector3(100, 30, 1)
 
-[node name="CharacterControllerTestScene" type="Node3D" unique_id=2059027252]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fdm2o"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3c2fn"]
+
+[node name="CharacterControllerTestScene2" type="Node3D" unique_id=2059027252]
 
 [node name="Player" parent="." unique_id=792214008 instance=ExtResource("1_rokcr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9791183, 2.3760958, 8.712219)
+
+[node name="GYM" type="Node3D" parent="." unique_id=1584722474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 
 [node name="LevelContainer" type="Node3D" parent="." unique_id=1563689866]
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="LevelContainer" unique_id=1897985476]
+transform = Transform3D(1, 0, 0, 0, 0.86230433, 0.50639045, 0, -0.50639045, 0.86230433, 41.99772, 9.864101, 38.850883)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 62.34
+spot_angle = 37.8
+
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2" unique_id=173173742 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../..")
+shadow_container = NodePath("../../../ShadowContainer")
+light = NodePath("..")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="LevelContainer/SpotLight3D2" unique_id=1077907604]
+transform = Transform3D(0.95074457, -0.16514823, -0.26231825, 0.15696867, -0.47322398, 0.86684483, -0.26729316, -0.8653237, -0.42399207, -5.5390434, 16.479437, -26.303265)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 62.34
+spot_angle = 37.8
+
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2/SpotLight3D2" unique_id=541526159 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../../..")
+shadow_container = NodePath("../../../../ShadowContainer")
+light = NodePath("..")
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="LevelContainer" unique_id=142926852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 6, 20)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 62.34
+spot_angle = 37.8
+
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D3" unique_id=337673273 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../..")
+shadow_container = NodePath("../../../ShadowContainer")
+light = NodePath("..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer" unique_id=809632510]
+environment = SubResource("Environment_5dnud")
+
+[node name="Floor" type="StaticBody3D" parent="LevelContainer" unique_id=1952382560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_layer = 11
+collision_mask = 20
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Floor" unique_id=600511667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008375168, 0, 0.35235214)
+material_override = SubResource("StandardMaterial3D_18wcm")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_gepqh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Floor" unique_id=1132417981]
+shape = SubResource("BoxShape3D_au7uu")
+
+[node name="Obstacle Green" parent="LevelContainer/Floor" unique_id=1905592916 instance=ExtResource("6_18wcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 18)
+
+[node name="CubeObstacle" parent="LevelContainer" unique_id=585309899 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5317631, 1388.6428)
+
+[node name="Obstacle" parent="LevelContainer" unique_id=1776418333 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.5, 2.5, 15.580996)
+
+[node name="Obstacle2" parent="LevelContainer" unique_id=1909306886 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -43.4433, 1, 30.409832)
+
+[node name="Obstacle3" parent="LevelContainer" unique_id=783386600 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0.5, 2.9928198)
+
+[node name="Obstacle4" parent="LevelContainer" unique_id=1510287969 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.486294, 3.5162783, 18.705574)
+
+[node name="Obstacle6" parent="LevelContainer" unique_id=745161666 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 6, 0, 0, 0, 1, -30, 3, 20)
+
+[node name="Obstacle9" parent="LevelContainer" unique_id=905417788 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 6, 0, 0, 0, 1, -15, 3, 20)
+
+[node name="Obstacle7" parent="LevelContainer" unique_id=1165397032 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8545804, 3.628408, 5583.5947)
+
+[node name="Wall" type="StaticBody3D" parent="LevelContainer" unique_id=1493682869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, -50)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall" unique_id=1344906052]
+shape = SubResource("BoxShape3D_fe35m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall" unique_id=1673610944]
+material_override = SubResource("StandardMaterial3D_ppd20")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_sg0in")
+
+[node name="Wall3" type="StaticBody3D" parent="LevelContainer" unique_id=372259529]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -50, 15, 0)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall3" unique_id=122424892]
+shape = SubResource("BoxShape3D_fe35m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall3" unique_id=2005139969]
+material_override = SubResource("StandardMaterial3D_ppd20")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_sg0in")
+
+[node name="Wall4" type="StaticBody3D" parent="LevelContainer" unique_id=225406471]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 15, 0)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall4" unique_id=1136354762]
+shape = SubResource("BoxShape3D_fe35m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall4" unique_id=1269136029]
+material_override = SubResource("StandardMaterial3D_ppd20")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_sg0in")
+
+[node name="Wall5" type="StaticBody3D" parent="LevelContainer" unique_id=1692905875]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 15, 0)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall5" unique_id=1326511584]
+shape = SubResource("BoxShape3D_fe35m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall5" unique_id=1343912871]
+material_override = SubResource("StandardMaterial3D_ppd20")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_sg0in")
+
+[node name="Wall2" type="StaticBody3D" parent="LevelContainer" unique_id=604039899]
+unique_name_in_owner = true
+transform = Transform3D(-2.1855695e-07, 0, 5, 0, 5, 0, -5, 0, -2.1855695e-07, 38.677372, 0, 27.676655)
+collision_layer = 11
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall2" unique_id=1151587960]
+shape = SubResource("CylinderShape3D_fdm2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall2" unique_id=340622384]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, -3.5527137e-15, 0, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_3c2fn")
+
+[node name="Obstacle Green" parent="LevelContainer" unique_id=873274571 instance=ExtResource("6_18wcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.900072, 5.213397, 4.6480618)
+
+[node name="Obstacle Red" parent="LevelContainer" unique_id=1860662117 instance=ExtResource("7_ppd20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 2)
+
+[node name="Marker3D" type="Marker3D" parent="LevelContainer" unique_id=1126659322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.56543, 1.2681818, -5.202299)
+
 [node name="SpotLight3D" type="SpotLight3D" parent="LevelContainer" unique_id=184581214]
-transform = Transform3D(0.87693554, 0.14960678, -0.4567297, -0.14769033, 0.9882191, 0.040131792, 0.457353, 0.03226157, 0.8886999, -3.916, 3.256, 7.207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 15)
 light_energy = 16.0
 light_size = 0.165
 shadow_enabled = true
@@ -49,90 +230,85 @@ level_container = NodePath("../..")
 shadow_container = NodePath("../../../ShadowContainer")
 light = NodePath("..")
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="LevelContainer" unique_id=1897985476]
-transform = Transform3D(0.35261628, 0.14356302, 0.9246899, -0.19620739, 0.9775386, -0.07694725, -0.9149671, -0.15429811, 0.37286443, -7.3803167, 3.256, -2.2843513)
+[node name="LightS1" type="Node3D" parent="LevelContainer" unique_id=542756124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5, 15)
+
+[node name="Lighsource1" parent="LevelContainer/LightS1" unique_id=456018481 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, -9, -2.5, 0)
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="LevelContainer/LightS1" unique_id=961421877]
+transform = Transform3D(0.9985093, 0, 0.054582015, 0, 1, 0, -0.054582015, 0, 0.9985093, 19.240963, 4.7683716e-07, 1.0499477)
 light_energy = 16.0
 light_size = 0.165
 shadow_enabled = true
 spot_range = 25.285
 spot_angle = 37.8
 
-[node name="CollidableLight" type="Node3D" parent="LevelContainer/SpotLight3D2" unique_id=173173742 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/LightS1/SpotLight3D4" unique_id=2132727354 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
 script = ExtResource("1_18wcm")
-level_container = NodePath("../..")
-shadow_container = NodePath("../../../ShadowContainer")
+level_container = NodePath("../../..")
+shadow_container = NodePath("../../../../ShadowContainer")
 light = NodePath("..")
 
-[node name="SimpleMovement" type="Node" parent="LevelContainer/SpotLight3D2" unique_id=424390524]
-script = ExtResource("4_ppd20")
+[node name="LightS3" type="Node3D" parent="LevelContainer" unique_id=1155435982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 30)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer" unique_id=809632510]
-environment = SubResource("Environment_5dnud")
+[node name="Lighsource1" parent="LevelContainer/LightS3" unique_id=156505010 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 1, 0, -2.5, 0)
 
-[node name="Floor" type="StaticBody3D" parent="LevelContainer" unique_id=1952382560]
-collision_layer = 11
-collision_mask = 20
+[node name="SpotLight3D4" type="SpotLight3D" parent="LevelContainer/LightS3" unique_id=281928438]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 25.285
+spot_angle = 37.8
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Floor" unique_id=600511667]
-cast_shadow = 0
-mesh = SubResource("BoxMesh_gepqh")
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/LightS3/SpotLight3D4" unique_id=1185121129 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../../..")
+shadow_container = NodePath("../../../../ShadowContainer")
+light = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Floor" unique_id=1132417981]
-shape = SubResource("BoxShape3D_au7uu")
+[node name="LightS2" type="Node3D" parent="LevelContainer" unique_id=483766279]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 26.5, 5, 9.5)
 
-[node name="CubeObstacle" parent="LevelContainer" unique_id=1905592916 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5317631, -0.024746656)
+[node name="Lighsource1" parent="LevelContainer/LightS2" unique_id=277983627 instance=ExtResource("5_7m8ql")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 5, 0, -0.70710677, 0, 0.70710677, 0, -2.5, -9.637138)
 
-[node name="Obstacle" parent="LevelContainer" unique_id=1776418333 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0852695, 1.5317631, 1.5200064)
+[node name="SpotLight3D4" type="SpotLight3D" parent="LevelContainer/LightS2" unique_id=84999117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+light_energy = 16.0
+light_size = 0.165
+shadow_enabled = true
+spot_range = 25.285
+spot_angle = 37.8
 
-[node name="Obstacle2" parent="LevelContainer" unique_id=1909306886 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.156523, 1.5317631, -4.7517996)
+[node name="CollidableLight" type="Node3D" parent="LevelContainer/LightS2/SpotLight3D4" unique_id=1003850362 node_paths=PackedStringArray("level_container", "shadow_container", "light")]
+script = ExtResource("1_18wcm")
+level_container = NodePath("../../..")
+shadow_container = NodePath("../../../../ShadowContainer")
+light = NodePath("..")
 
-[node name="Obstacle3" parent="LevelContainer" unique_id=783386600 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.452465, 1.5317631, -4.7517996)
+[node name="Obstacle Green2" parent="LevelContainer" unique_id=1242421271 instance=ExtResource("6_18wcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
-[node name="Obstacle4" parent="LevelContainer" unique_id=1510287969 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.583313, 3.9437046, -4.7517996)
+[node name="Obstacle Red2" parent="LevelContainer" unique_id=1949219073 instance=ExtResource("7_ppd20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, 10)
 
-[node name="Obstacle5" parent="LevelContainer" unique_id=456018481 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2777319, 2.1163568, -1.6752365)
+[node name="Obstacle Red2" parent="LevelContainer/Obstacle Red2" unique_id=2113157562 instance=ExtResource("7_ppd20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 
-[node name="Obstacle6" parent="LevelContainer" unique_id=745161666 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.176784, 3.628408, 2.130277)
+[node name="Obstacle Red3" parent="LevelContainer" unique_id=290493693 instance=ExtResource("7_ppd20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 12)
 
-[node name="Obstacle7" parent="LevelContainer" unique_id=1165397032 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8545804, 3.628408, -1.752094)
+[node name="Obstacle Red3" parent="LevelContainer/Obstacle Red3" unique_id=1499010650 instance=ExtResource("7_ppd20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, -7)
 
-[node name="Obstacle8" parent="LevelContainer" unique_id=73671073 instance=ExtResource("5_7m8ql")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.111099, 2.4194112, -3.023629)
+[node name="Obstacle Green3" parent="LevelContainer" unique_id=1217285249 instance=ExtResource("6_18wcm")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5, 1.5, 17)
 
-[node name="Wall" type="StaticBody3D" parent="LevelContainer" unique_id=1493682869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -6.1990848)
-collision_layer = 11
-collision_mask = 5
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall" unique_id=1344906052]
-shape = SubResource("BoxShape3D_fe35m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall" unique_id=1673610944]
-cast_shadow = 0
-mesh = SubResource("BoxMesh_sg0in")
-
-[node name="Wall2" type="StaticBody3D" parent="LevelContainer" unique_id=604039899]
-unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.908125, 7, -6.1990848)
-collision_layer = 11
-collision_mask = 5
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelContainer/Wall2" unique_id=1151587960]
-shape = SubResource("BoxShape3D_fe35m")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelContainer/Wall2" unique_id=340622384]
-cast_shadow = 0
-mesh = SubResource("BoxMesh_sg0in")
-
-[node name="Marker3D" type="Marker3D" parent="LevelContainer" unique_id=1126659322]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8177013, 1.2681822, -5.2022986)
+[node name="Obstacle Green4" parent="LevelContainer" unique_id=1101716592 instance=ExtResource("6_18wcm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.5, 16)
 
 [node name="ShadowContainer" type="Node3D" parent="." unique_id=1289339809]

@@ -15,6 +15,7 @@ extends Node
 @export var wall_offset := 0.5
 @export var wall_check_distance := 2.0
 @export var corner_margin := 0.1
+@export_range(0.1, 3.0, 0.1) var nearby_wall_distance := 1.0
 
 @onready var light: SpotLight3D = $"../../LevelContainer/SpotLight3D"
 
@@ -56,7 +57,9 @@ func _physics_process(_delta: float) -> void:
 
 #region Transition
 func _enter_shadow_form() -> void:
-	var wall := _find_wall(initial_pos.global_position, -initial_pos.global_transform.basis.z)
+	var wall := _find_nearby_wall()
+	if wall.is_empty():
+		wall = _find_wall(initial_pos.global_position, -initial_pos.global_transform.basis.z)
 	if wall.is_empty():
 		print("no wall found")
 		return
@@ -130,6 +133,27 @@ func _find_wall(from: Vector3, dir: Vector3, length := wall_check_distance) -> D
 	var query := PhysicsRayQueryParameters3D.create(
 		from, from + dir.normalized() * length, wall_mask)
 	return player.get_world_3d().direct_space_state.intersect_ray(query)
+
+
+## Finds the nearest wall around the player using short horizontal rays.
+func _find_nearby_wall() -> Dictionary:
+	var closest_hit: Dictionary = {}
+	var closest_distance := nearby_wall_distance
+	var ray_count := 32
+
+	for i in range(ray_count):
+		var angle := TAU * float(i) / ray_count
+		var direction := Vector3(cos(angle), 0.0, sin(angle))
+		var hit := _find_wall(player.global_position, direction, nearby_wall_distance)
+		if hit.is_empty():
+			continue
+
+		var distance := player.global_position.distance_to(hit.position)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_hit = hit
+
+	return closest_hit
 	
 func _get_normal() -> Vector3:
 	_check_inner_corner()

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://coona8bi7pooh"]
+
+[ext_resource type="Texture2D" uid="uid://cwq2vvqmm2lff" path="res://addons/godot-prototype-texture/PNG/grid_512x512/grid_red_512x512.png" id="1_fcmcs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppd20"]
+albedo_texture = ExtResource("1_fcmcs")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nmvmi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sg0in"]
+
+[node name="Obstacle Red" type="StaticBody3D" unique_id=1905592916]
+
+[node name="CollidableShadow" type="MeshInstance3D" parent="." unique_id=2110086530]
+material_override = SubResource("StandardMaterial3D_ppd20")
+mesh = SubResource("BoxMesh_nmvmi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1603713878]
+shape = SubResource("BoxShape3D_sg0in")
