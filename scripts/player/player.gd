@@ -76,18 +76,24 @@ func get_move_input_vector() -> Vector2:
 
 func get_move_direction() -> Vector3:
 	var input := get_move_input_vector()
-	var dir : Vector3
 	if input == Vector2.ZERO:
 		return Vector3.ZERO
-	
-	if !comp_shadow.is_shadow:
+
+	var dir: Vector3
+
+	if not comp_shadow.is_shadow:
 		dir = camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
-		print(dir)
 	else:
-		#dir = comp_shadow._get_normal() + Vector3(input.x, 0.0, input.y)
-		dir = -Vector3(input.x, 0.0, input.y).rotated(up_direction,comp_shadow._get_normal().angle_to(Vector3(0,0,-1)))
-		print(dir)
-		
+		var n := comp_shadow._get_normal()
+		n.y = 0.0
+		if n.length_squared() < 0.0001:
+			# ombra su una superficie orizzontale: usa la camera
+			dir = camera_rig.get_planar_basis() * Vector3(input.x, 0.0, input.y)
+		else:
+			n = n.normalized()
+			var right := Vector3.UP.cross(n)      # stessa convenzione di CompShadow._check_inner_corner()
+			dir = right * input.x + n * input.y   # avanti (input.y < 0) = verso il muro
+
 	# redundant since camera_rig doesn't rotate on y, but better safe than sorry
 	dir.y = 0.0
 	return dir.normalized()
