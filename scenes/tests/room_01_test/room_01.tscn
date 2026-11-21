@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_cvvee"]
 [ext_resource type="Texture2D" uid="uid://dsq87ul8bxgij" path="res://scenes/tests/room_01_test/textures/light_light.png" id="2_5krkw"]
+[ext_resource type="PackedScene" uid="uid://dcysipvm0muqi" path="res://scenes/tests/room_01_test/meshes/barrel_-_low_poly_medieval_cc0/scene.gltf" id="3_4i1pf"]
+[ext_resource type="PackedScene" uid="uid://cs4xgp63cdhon" path="res://scenes/tests/room_01_test/meshes/village_ladder_-_low_poly_medieval_cc0/scene.gltf" id="4_a8gs0"]
 
 [sub_resource type="Environment" id="Environment_xrv2b"]
 background_mode = 1
@@ -10,6 +12,7 @@ background_energy_multiplier = 2.15
 ambient_light_source = 2
 ambient_light_color = Color(0.091736265, 0.10619471, 0.17576626, 1)
 ambient_light_energy = 3.31
+ssao_enabled = true
 ssao_radius = 2.48
 glow_enabled = true
 glow_intensity = 0.79
@@ -48,6 +51,21 @@ proximity_fade_enabled = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vub1y"]
 height = 6.4359283
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5krkw"]
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 1, 1)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjju1"]
+emission_enabled = true
+emission = Color(0.22470333, 0.27793723, 0.57959574, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_5krkw"]
+material = SubResource("StandardMaterial3D_hjju1")
+radius = 0.02
+height = 0.03
 
 [node name="room_01" type="Node3D" unique_id=1010355922]
 
@@ -223,3 +241,14 @@ transform = Transform3D(-1.3113416e-07, 10, -1.2064342e-07, 0, -4.371139e-07, -2
 mesh = SubResource("CylinderMesh_vub1y")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=826901269]
+transform = Transform3D(57.499752, 0, 0, 0, 11.064164, 0, 0, 0, 25.238033, 0, 12.48995, 0)
+amount = 150
+lifetime = 7.54
+process_material = SubResource("ParticleProcessMaterial_5krkw")
+draw_pass_1 = SubResource("SphereMesh_5krkw")
+
+[node name="Sketchfab_Scene" parent="." unique_id=1990993931 instance=ExtResource("3_4i1pf")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -21.514954, -0.32516193, -11.546518)
+
+[node name="Sketchfab_Scene2" parent="." unique_id=1947917368 instance=ExtResource("4_a8gs0")]
+transform = Transform3D(8, 0, 0, 0, 7.256807, 3.3673065, 0, -3.3673065, 7.256807, 15.574978, 1.1880808, -3.1206646)
