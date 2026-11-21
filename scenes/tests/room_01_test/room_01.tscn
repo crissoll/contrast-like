@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dggqd7qmgkdq0" path="res://scenes/player/player.tscn" id="1_cvvee"]
 [ext_resource type="Texture2D" uid="uid://dsq87ul8bxgij" path="res://scenes/tests/room_01_test/textures/light_light.png" id="2_5krkw"]
-[ext_resource type="PackedScene" uid="uid://dcysipvm0muqi" path="res://scenes/tests/room_01_test/meshes/barrel_-_low_poly_medieval_cc0/scene.gltf" id="3_4i1pf"]
 [ext_resource type="PackedScene" uid="uid://cs4xgp63cdhon" path="res://scenes/tests/room_01_test/meshes/village_ladder_-_low_poly_medieval_cc0/scene.gltf" id="4_a8gs0"]
 
 [sub_resource type="Environment" id="Environment_xrv2b"]
@@ -199,7 +198,7 @@ omni_attenuation = 0.604
 [node name="OmniLight3D2" type="OmniLight3D" parent="lights" unique_id=2033436693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.933983, 11.474085, 12.023038)
 light_color = Color(0.4299547, 0.08442827, 0.29003313, 1)
-light_energy = 4.881
+light_energy = 4.31
 omni_range = 20.567
 omni_attenuation = 1.198
 
@@ -247,8 +246,5 @@ lifetime = 7.54
 process_material = SubResource("ParticleProcessMaterial_5krkw")
 draw_pass_1 = SubResource("SphereMesh_5krkw")
 
-[node name="Sketchfab_Scene" parent="." unique_id=1990993931 instance=ExtResource("3_4i1pf")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -21.514954, -0.32516193, -11.546518)
-
-[node name="Sketchfab_Scene2" parent="." unique_id=1947917368 instance=ExtResource("4_a8gs0")]
-transform = Transform3D(8, 0, 0, 0, 7.256807, 3.3673065, 0, -3.3673065, 7.256807, 15.574978, 1.1880808, -3.1206646)
+[node name="Sketchfab_Scene" parent="." unique_id=1947917368 instance=ExtResource("4_a8gs0")]
+transform = Transform3D(8, 0, 0, 0, 8.116682, 1.258401, 0, -1.2831606, 7.9600644, 16.620396, -1.2540598, -7.5245876)
