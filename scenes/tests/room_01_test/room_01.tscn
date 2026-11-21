@@ -17,9 +17,8 @@ glow_enabled = true
 glow_intensity = 0.79
 glow_hdr_threshold = 2.22
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0252
 volumetric_fog_albedo = Color(0.22745098, 0.2509804, 0.3764706, 1)
-volumetric_fog_emission = Color(0.027409147, 0.027409151, 0.027409151, 1)
+volumetric_fog_emission = Color(1.504086e-09, 0.035174593, 0.049025312, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77qcy"]
 
@@ -33,6 +32,7 @@ emission_energy_multiplier = 10.63
 material = SubResource("StandardMaterial3D_vub1y")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_77qcy"]
+uv2_padding = 2.1
 top_radius = 0.0
 bottom_radius = 0.35
 height = 3.8963318
@@ -43,9 +43,9 @@ cap_bottom = false
 transparency = 1
 blend_mode = 1
 shading_mode = 0
-albedo_color = Color(0.8633, 0.88464004, 0.97, 0.32941177)
+albedo_color = Color(0.77, 0.9156667, 1, 0.1254902)
 albedo_texture = ExtResource("2_5krkw")
-uv1_scale = Vector3(1.6, 1.6, 1.6)
+uv1_scale = Vector3(2, 2, 2)
 proximity_fade_enabled = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vub1y"]
@@ -204,12 +204,12 @@ omni_attenuation = 1.198
 
 [node name="searchlight" type="SpotLight3D" parent="lights" unique_id=279815472]
 transform = Transform3D(-0.19367975, -0.6597247, 0.7261208, -0.4623349, 0.7141733, 0.5255501, -0.8652945, -0.2339226, -0.44333464, 27.158989, 15.208811, -15.8957405)
-light_color = Color(0.5855088, 0.6506452, 1, 1)
+light_color = Color(0.7159512, 0.954363, 1.3119808, 1)
 light_energy = 16.0
 light_volumetric_fog_energy = 16.0
 shadow_enabled = true
 spot_range = 102.969
-spot_attenuation = 0.3
+spot_attenuation = 0.71
 spot_angle = 15.59
 spot_angle_attenuation = 1.4142141
 
@@ -217,7 +217,7 @@ spot_angle_attenuation = 1.4142141
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5.7634373)
 
 [node name="fakelight" type="MeshInstance3D" parent="." unique_id=33368122]
-transform = Transform3D(-6.948666, 10.828191, -0.36840755, 5.845163, 5.2056236, -5.024551, -6.3130693, -7.098567, -4.246649, 5.7155743, 4.6694455, -1.6258264)
+transform = Transform3D(-6.948666, 10.828191, -0.36840764, 6.2243447, 5.6345997, -4.7523456, -5.9395547, -6.763095, -4.5492144, 6.084881, 4.012018, -1.4937482)
 mesh = SubResource("CylinderMesh_77qcy")
 surface_material_override/0 = SubResource("StandardMaterial3D_76q71")
 
